@@ -5,6 +5,7 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { IonicStorageModule } from '@ionic/storage';
+import { Events, NavParams, NavController } from '@ionic/angular'
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { AppVersion } from '@ionic-native/app-version/ngx';
@@ -31,7 +32,6 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserModule,
     // IonicModule.forRoot(),
     IonicStorageModule.forRoot(),
-   
     AppRoutingModule,
     HttpClientModule,
     IonicModule.forRoot({

@@ -17,7 +17,7 @@ export class LoginPage implements OnInit {
     model = {
         account: '',
         password: '',
-        imeiCode: '147852963789456'
+        imeiCode: '123456789741963'
     };
     constructor(public nav: NavController,
         public helper: Helper,

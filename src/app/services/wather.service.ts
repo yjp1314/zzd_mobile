@@ -16,4 +16,13 @@ export class WeatherService {
     public get(params) {
         return this.http.post('', params);
     }
+
+    public getLastWeather(type:any, companyID:any){
+        return this.http.post('weather/GetWeathers', {
+            'companyId': companyID,
+            'type': type,
+            'pageNumber':1,
+            'pageSize':1,
+        });
+    }
 }

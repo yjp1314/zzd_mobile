@@ -1,7 +1,19 @@
 <ion-header>
   <ion-toolbar>
-      <ion-title style="background: linear-gradient(to right, #66cdff , #1f96ff);">
-          <span style="color: white">天气预报</span>
-      </ion-title>
+    <ion-title style="background: linear-gradient(to right, #66cdff , #1f96ff);">
+      <span style="color: white">天气预报</span>
+    </ion-title>
+    <ion-buttons  style="float:right;">
+      <button ion-button small icon-only clear (click)="viewOther()" style="background-color:rgba(0,0,0,0)">
+        <span style="color: white">更多</span>        
+      </button>
+    </ion-buttons>
   </ion-toolbar>
+  <div class="aui-text-title">
+    <h2><span>短期天气预报</span></h2>
+    <h3>{{weatherInfo.title}}</h3>
+  </div>
+  <p>
+    {{weatherInfo.content}}
+  </p>
 </ion-header>
