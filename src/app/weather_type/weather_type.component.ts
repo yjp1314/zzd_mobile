@@ -48,10 +48,10 @@ export class WeatherTypePage implements OnInit {
 
     viewList(typeId) {
         // this.nav.navigateForward('/home/weather/list');
-        this.nav.navigateForward(['/home/weather/list'],{
-            queryParams:{
+        this.nav.navigateForward(['/home/weather/list'], {
+            queryParams: {
                 typeId: typeId
             }
-    });
+        });
     }
 }

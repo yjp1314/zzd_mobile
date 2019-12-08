@@ -23,8 +23,14 @@ export class WeatherListPage implements OnInit {
     weatherList: any = [];
     typeId = 1;
     title: string = "";
+    pageSize = 2;
+    currentPageNumber = 1;
+    loading = false;
+    hasMore = true;
+
     constructor(public route: ActivatedRoute,
         public nav: NavController,
+        public helper: Helper,
         public service: WeatherService,
         public storage: Storage) {
     }
@@ -33,22 +39,20 @@ export class WeatherListPage implements OnInit {
         this.route.queryParams.subscribe((data) => {
             console.log("Params:", data);
             this.typeId = data.typeId;
-        })
-        this.resetTitle();
-        // console.log("navParams:",NavParams);
-        // this.typeId = this.navParams.data.typeId;      
-        // this.storage.get('loginmsg').then(loginmsg => {
-        //     if (loginmsg != null) {
-        //         console.log("loginmsg:",loginmsg);
-        //         console.log("CompanyID:",loginmsg.companyId);
-        //         this.userInfo.companyId = loginmsg.companyId;
-        //     }
-        //    // this.getWeathers();
-        // });
+            this.resetTitle();
+        });
+        this.storage.get('loginmsg').then(loginmsg => {
+            if (loginmsg != null) {
+                console.log("loginmsg:", loginmsg);
+                console.log("CompanyID:", loginmsg.companyId);
+                this.userInfo.companyId = loginmsg.companyId;
+            }
+            this.getWeathers();
+        });
     }
 
     resetTitle() {
-        console.log("old Title:",this.title,this.typeId);
+        console.log("old Title:", this.title, this.typeId);
         switch (Number(this.typeId)) {
             case 1:
                 this.title = "短期天气预报";
@@ -72,26 +76,48 @@ export class WeatherListPage implements OnInit {
                 this.title = "短期天气预报";
                 break;
         }
-        console.log("new Title:",this.title,this.typeId);
+        console.log("new Title:", this.title, this.typeId);
     }
 
-    getWeathers() {
-        this.service.getLastWeather(this.typeId, this.userInfo.companyId).subscribe(res => {
+    getWeathers(e = null) {
+        this.helper.showLoading();
+        this.service.getWeathersByType(this.typeId, this.userInfo.companyId, this.currentPageNumber, this.pageSize).subscribe(res => {
             if (res.isSuccess && res.total > 0) {
-                this.weatherList = res.data;
+                this.weatherList = this.weatherList.concat(res.data);
+                if(res.total < this.pageSize)
+                {
+                    this.hasMore = false;
+                }
             }
             else if (res.isSuccess && res.total == 0) {
+                this.helper.toast('没有' + this.title + '预报信息，请联系管理员！', 2000, 'bottom');
+                return;
 
             }
             else {
+                this.helper.toast('没有' + this.title + '预报信息，请联系管理员！', 2000, 'bottom');
+                return;
 
             }
+            e ? e.target.complete() : "";
+            this.helper.hideLoading();
         }, () => {
+            e ? e.target.complete() : "";
+            this.helper.hideLoading();
 
         });
     }
 
-    viewOther() {
-        this.nav.navigateRoot('/home/main');
+    viewDetail(weatherId) {
+        this.nav.navigateRoot(['/home/weather'], {
+            queryParams: {
+                weatherId: weatherId
+            }
+        });
+    }
+    loadData(e) {
+        if (!this.hasMore){ console.log("abcdefg");return;}
+        this.currentPageNumber++;
+        this.getWeathers(e);
     }
 }
