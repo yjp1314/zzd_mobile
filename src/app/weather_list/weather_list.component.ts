@@ -23,7 +23,7 @@ export class WeatherListPage implements OnInit {
     weatherList: any = [];
     typeId = 1;
     title: string = "";
-    pageSize = 2;
+    pageSize = 10;
     currentPageNumber = 1;
     loading = false;
     hasMore = true;
@@ -84,8 +84,7 @@ export class WeatherListPage implements OnInit {
         this.service.getWeathersByType(this.typeId, this.userInfo.companyId, this.currentPageNumber, this.pageSize).subscribe(res => {
             if (res.isSuccess && res.total > 0) {
                 this.weatherList = this.weatherList.concat(res.data);
-                if(res.total < this.pageSize)
-                {
+                if (res.total < this.pageSize) {
                     this.hasMore = false;
                 }
             }
@@ -115,9 +114,14 @@ export class WeatherListPage implements OnInit {
             }
         });
     }
+
     loadData(e) {
-        if (!this.hasMore){ console.log("abcdefg");return;}
+        if (!this.hasMore) { return; }
         this.currentPageNumber++;
         this.getWeathers(e);
+    }
+    
+    goBack(){
+        this.nav.navigateBack("/home/weather/type");
     }
 }

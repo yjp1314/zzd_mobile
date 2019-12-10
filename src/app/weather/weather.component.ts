@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { DomSanitizer } from '@angular/platform-browser';
 import { Utils } from '../providers/Utils';
 import { NativeService } from '../providers/NativeService';
 import { Helper } from '../providers/Helper';
@@ -27,10 +28,12 @@ export class WeatherPage implements OnInit {
         content: "",
         id: 3
     };
-    type = 1;
+    listType = 0;
+    title = "";
     loading = false;
 
-    constructor(public route: ActivatedRoute,
+    constructor(public sanitizer: DomSanitizer,
+        public route: ActivatedRoute,
         public events: Events,
         public nav: NavController,
         public helper: Helper,
@@ -42,7 +45,7 @@ export class WeatherPage implements OnInit {
         this.route.queryParams.subscribe((data) => {
             console.log("Params:", data);
             this.weatherInfo.id = data.weatherId;
-            console.log("weatherInfo.id:",this.weatherInfo.id);
+            console.log("weatherInfo.id:", this.weatherInfo.id);
             if (this.weatherInfo.id > 0) {
                 this.getWeather();
             }
@@ -53,13 +56,15 @@ export class WeatherPage implements OnInit {
                 console.log("CompanyID:", loginmsg.companyId);
                 this.userInfo.companyId = loginmsg.companyId;
             }
-            
-            if (this.weatherInfo.id == null ) {
+
+            if (this.weatherInfo.id == null) {
                 this.getlastWeather();
             }
         });
     }
     getWeather() {
+        this.listType = 0;
+        this.helper.showLoading();
         this.service.getWeather(this.weatherInfo.id).subscribe(res => {
             if (res.isSuccess) {
                 let weather = res.data;
@@ -69,21 +74,25 @@ export class WeatherPage implements OnInit {
                 this.weatherInfo.title = weather.title;
                 this.weatherInfo.content = weather.content;
                 console.log("weatherInfo", this.weatherInfo);
-                this.loading = false;
+                this.resetType();
+                this.listType = weather.type;
+                this.helper.hideLoading();
             }
             else {
-                this.loading = false;
                 this.helper.toast('没有天气预报信息，请联系管理员！', 2000, 'bottom');
+                this.helper.hideLoading();
                 return;
             }
         }, () => {
-            this.loading = false;
             this.helper.toast('天气预报信息获取错误，请联系管理员！', 2000, 'bottom');
+            this.helper.hideLoading();
             return;
         });
     };
     getlastWeather() {
-        this.service.getLastWeather(this.type, this.userInfo.companyId).subscribe(res => {
+        this.listType = 0;
+        this.helper.showLoading();
+        this.service.getLastWeather(this.weatherInfo.type, this.userInfo.companyId).subscribe(res => {
             if (res.isSuccess && res.total > 0) {
                 let weather = res.data[0];
                 this.weatherInfo.companyId = weather.companyId;
@@ -92,23 +101,64 @@ export class WeatherPage implements OnInit {
                 this.weatherInfo.title = weather.title;
                 this.weatherInfo.content = weather.content;
                 console.log("weatherInfo", this.weatherInfo);
-                this.loading = false;
+                this.resetType();
+                this.helper.hideLoading();
             }
             else {
-                this.loading = false;
                 this.helper.toast('没有天气预报信息，请联系管理员！', 2000, 'bottom');
+                this.helper.hideLoading();
                 return;
             }
         }, () => {
-            this.loading = false;
             this.helper.toast('天气预报信息获取错误，请联系管理员！', 2000, 'bottom');
+            this.helper.hideLoading();
             return;
         });
+    }
+
+
+    resetType() {
+        switch (Number(this.weatherInfo.type)) {
+            case 1:
+                this.title = "短期天气预报";
+                break;
+            case 2:
+                this.title = "旬天气预报";
+                break;
+            case 3:
+                this.title = "月天气预报";
+                break;
+            case 4:
+                this.title = "季天气预报";
+                break;
+            case 5:
+                this.title = "年天气预报";
+                break;
+            case 6:
+                this.title = "月气候评估";
+                break;
+            default:
+                this.title = "短期天气预报";
+                break;
+        }
     }
 
     viewOther() {
         // this.nav.navigateRoot('/home/weather/type');
         // this.events.publish('jumpTo', 'WeatherTypePage', { id: 11 });
         this.nav.navigateForward('/home/weather/type');
+    }
+    
+    viewList() {
+        // this.nav.navigateForward('/home/weather/list');
+        this.nav.navigateForward(['/home/weather/list'], {
+            queryParams: {
+                typeId: this.listType
+            }
+        });
+    }
+
+    assembleHTML(strHTML: any) {
+        return this.sanitizer.bypassSecurityTrustHtml(strHTML);
     }
 }

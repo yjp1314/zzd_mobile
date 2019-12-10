@@ -3,17 +3,30 @@
     <ion-title style="background: linear-gradient(to right, #66cdff , #1f96ff);">
       <span style="color: white">天气预报</span>
     </ion-title>
-    <ion-buttons  style="float:right;">
+    <ion-buttons style="float:left;">
+      <button ion-button small icon-only clear (click)="viewList()" style="background-color:rgba(0,0,0,0)" *ngIf="listType > 0">
+        <span style="color: white; font-size: x-small;font-weight: bolder;">返回</span>
+      </button>
+    </ion-buttons>
+    <ion-buttons style="float:right;">
       <button ion-button small icon-only clear (click)="viewOther()" style="background-color:rgba(0,0,0,0)">
-        <span style="color: white">更多</span>        
+        <span style="color: white; font-size: x-small;font-weight: bolder;">更多</span>
       </button>
     </ion-buttons>
   </ion-toolbar>
-  <div class="aui-text-title">
-    <h2><span>短期天气预报</span></h2>
-    <h3>{{weatherInfo.title}}</h3>
-  </div>
-  <p>
-    {{weatherInfo.content}}
-  </p>
 </ion-header>
+<ion-content>
+  <div class="tab-panel">
+    <div class="tab-panel-item tab-active">
+      <div class="aui-text-title">
+        <h2><span>{{weatherInfo.title}}</span></h2>
+        <p>{{title}}</p>
+      </div>
+      <div class="aui-table" [innerHTML]="assembleHTML(weatherInfo.content)">
+        <!-- <p>
+          {{weatherInfo.content}}
+        </p> -->
+      </div>
+    </div>
+  </div>
+</ion-content>

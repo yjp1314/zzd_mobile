@@ -1,33 +1,40 @@
 <ion-header>
   <ion-toolbar>
+      <!-- <ion-buttons start>
+        <button ion-button small icon-only clear (click)="goback();">
+          <ion-icon name="arrow-round-back" color="default"></ion-icon>
+        </button>
+      </ion-buttons> -->
     <ion-title style="background: linear-gradient(to right, #66cdff , #1f96ff);">
       <span style="color: white">天气预报</span> 
     </ion-title>
+    <ion-buttons style="float:left;">
+      <button ion-button small icon-only clear (click)="goBack()" style="background-color:rgba(0,0,0,0)">
+        <span style="color: white; font-size: x-small;font-weight: bolder;">返回</span>
+      </button>
+    </ion-buttons>
   </ion-toolbar>
 
 </ion-header>
 <ion-content>
-
-  <div class="aui-table">
-    <ul class="table-nav">
-      <li class="table-nav-item1" (click)="viewList(1)">
-        <span>短期天气预报</span>
-      </li>
-      <li class="table-nav-item1" (click)="viewList(2)">
-        <span>旬天气预报</span>
-      </li>
-      <li class="table-nav-item1" (click)="viewList(3)">
-        <span>月天气预报</span>
-      </li>
-      <li class="table-nav-item1" (click)="viewList(4)">
-        <span>季天气预报</span>
-      </li>
-      <li class="table-nav-item1" (click)="viewList(5)">
-        <span>年天气预报</span>
-      </li>
-      <li class="table-nav-item1" (click)="viewList(6)">
-        <span>月气候评估</span>
-      </li>
-    </ul>
-  </div>
+    <ion-list no-margin>
+        <ion-item (click)="viewList(1)">
+          <ion-label><ion-icon name="arrow-round-back" color="red"></ion-icon> 短期天气预报</ion-label>
+        </ion-item>
+        <ion-item (click)="viewList(2)">
+          <ion-label><ion-icon name="arrow-round-back" color="default"></ion-icon>旬天气预报</ion-label>
+        </ion-item>
+        <ion-item (click)="viewList(3)">
+          <ion-label><ion-icon name="arrow-round-back" color="default"></ion-icon>月天气预报</ion-label>
+        </ion-item>
+        <ion-item (click)="viewList(4)">
+          <ion-label><ion-icon name="arrow-round-back" color="default"></ion-icon>季天气预报</ion-label>
+        </ion-item>
+        <ion-item (click)="viewList(5)">
+          <ion-label><ion-icon name="arrow-round-back" color="default"></ion-icon>年天气预报</ion-label>
+        </ion-item>
+        <ion-item (click)="viewList(6)">
+          <ion-label><ion-icon name="arrow-round-back" color="default"></ion-icon>月气候评估</ion-label>
+        </ion-item>
+    </ion-list>
 </ion-content>

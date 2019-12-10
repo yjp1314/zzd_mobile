@@ -1,7 +1,50 @@
 <ion-header>
   <ion-toolbar>
-      <ion-title style="background: linear-gradient(to right, #66cdff , #1f96ff);">
-          <span style="color: white">数据监测</span>
-      </ion-title>
+    <ion-title style="background: linear-gradient(to right, #66cdff , #1f96ff);">
+      <span style="color: white">数据监测</span>
+    </ion-title>
   </ion-toolbar>
 </ion-header>
+
+<ion-content>
+
+  <div class="tab-panel">
+    <div class="tab-panel-item tab-active">
+        <div class="aui-text-title">
+          <h2><span>区站列表</span></h2>
+        </div>
+    </div>
+    <ion-list no-margin>
+      <ion-item (click)="viewList(1)">
+        <ion-label>
+          <ion-icon name="arrow-round-back" color="red"></ion-icon> Z0001:褡裢岛南部
+        </ion-label>
+      </ion-item>
+      <ion-item (click)="viewList(2)">
+        <ion-label>
+          <ion-icon name="arrow-round-back" color="default"></ion-icon>Z0002:獐子岛南洋
+        </ion-label>
+      </ion-item>
+      <ion-item (click)="viewList(3)">
+        <ion-label>
+          <ion-icon name="arrow-round-back" color="default"></ion-icon>Z0003:小耗岛北部
+        </ion-label>
+      </ion-item>
+      <ion-item (click)="viewList(4)">
+        <ion-label>
+          <ion-icon name="arrow-round-back" color="default"></ion-icon>Z0004:獐子岛沙包
+        </ion-label>
+      </ion-item>
+      <ion-item (click)="viewList(5)">
+        <ion-label>
+          <ion-icon name="arrow-round-back" color="default"></ion-icon>Z0005:獐子岛西部
+        </ion-label>
+      </ion-item>
+      <ion-item (click)="viewList(6)">
+        <ion-label>
+          <ion-icon name="arrow-round-back" color="default"></ion-icon>Z0006:大耗岛南部
+        </ion-label>
+      </ion-item>
+    </ion-list>
+  </div>
+</ion-content>

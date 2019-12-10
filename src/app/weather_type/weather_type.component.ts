@@ -54,4 +54,8 @@ export class WeatherTypePage implements OnInit {
             }
         });
     }
+
+    goBack(){
+        this.nav.navigateRoot("/home/weather");
+    }
 }
