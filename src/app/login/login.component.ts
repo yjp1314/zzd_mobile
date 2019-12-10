@@ -75,7 +75,7 @@ export class LoginPage implements OnInit {
                 this.nav.navigateRoot('/home/main');
             } else {
                 this.loading = false;
-                this.helper.toast('手机号或密码错误,请重试！', 2000, 'bottom');
+                this.helper.toast(res.errorMessage, 2000, 'bottom');
                 return;
             }
         }, () => {
