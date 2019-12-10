@@ -1,5 +1,12 @@
-<!-- <div class="limiter">
-  <div class="container-login100">
+<ion-header>
+  <ion-toolbar>
+    <ion-title style="background: linear-gradient(to right, #1f96ff , #00569F);">
+      <span style="color: white">首 页</span>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="aui-scrollView">
+  <div class="sec_notice">
     <div class="wrap-notice">
       <div class="shouRight">
         <ul class="slideTopbox" slide-scroll style="top:0px;">
@@ -10,6 +17,8 @@
         </ul>
       </div>
     </div>
+  </div>
+  <div class="sec_picture">
     <div class="wrap-pic">
       <div class="container">
         <div class="test" *ngFor="let item of imgList">
@@ -18,17 +27,11 @@
         </div>
       </div>
     </div>
-      <div class="wrap-weather">
-      weather
-    </div>  
   </div>
-
-</div> -->
-
-<ion-header>
-  <ion-toolbar>
-      <ion-title style="background: linear-gradient(to right, #66cdff , #1f96ff);">
-          <span style="color: white">首 页</span>
-      </ion-title>
-  </ion-toolbar>
-</ion-header>
+  <div class="sec_weather">
+      <div class="wrap-weather">
+          weather
+        </div> 
+  </div>
+  
+</ion-content>
