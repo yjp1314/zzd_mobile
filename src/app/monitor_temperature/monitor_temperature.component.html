@@ -1,0 +1,26 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title style="background: linear-gradient(to right, #66cdff , #1f96ff);">
+      <span style="color: white">数据监测</span>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <div class="tab-panel">
+    <div class="tab-panel-item tab-active">
+        <div class="aui-text-title">
+          <h2><span>{{station_info.station_name}}</span></h2>
+          <p><span>东经：{{station_info.east_longitude}}</span> <span>北纬：{{station_info.northern_latitude}}</span></p>
+        </div>
+    </div>
+    <ion-list no-margin>
+      <ion-item>
+          <div class="aui-chart" id="temperatureChart"></div>
+      </ion-item>
+      <ion-item>
+      </ion-item>
+    </ion-list>
+  </div>
+</ion-content>

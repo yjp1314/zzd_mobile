@@ -34,6 +34,16 @@ const routes: Routes = [
                         path: '',
                         loadChildren: () =>
                             import('../weather/weather.module').then(m => m.WeatherPageModule)
+                    },
+                    {
+                        path: 'list',
+                        loadChildren: () =>
+                            import('../weather_list/weather_list.module').then(m => m.WeatherListPageModule)
+                    },
+                    {
+                        path: 'type',
+                        loadChildren: () =>
+                            import('../weather_type/weather_type.module').then(m => m.WeatherTypePageModule)
                     }
                 ]
             },

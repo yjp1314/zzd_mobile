@@ -5,3 +5,18 @@
       </ion-title>
   </ion-toolbar>
 </ion-header>
+<ion-content>
+  <div class="tab-panel">
+    <div class="tab-panel-item tab-active">
+      <div class="aui-text-title">
+        <h2><span>{{weatherInfo.title}}</span></h2>
+        <p>{{title}}</p>
+      </div>
+      <div class="aui-table" [innerHTML]="assembleHTML(weatherInfo.content)">
+        <!-- <p>
+          {{weatherInfo.content}}
+        </p> -->
+      </div>
+    </div>
+  </div>
+</ion-content>
