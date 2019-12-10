@@ -31,6 +31,7 @@
         "@ionic-native/status-bar": "^5.14.0",
         "@ionic/angular": "^4.7.1",
         "@ionic/storage": "^2.2.0",
+        "cordova-android": "^8.1.0",
         "cordova-ios": "5.0.1",
         "cordova-plugin-device": "2.0.2",
         "cordova-plugin-ionic-keyboard": "^2.0.5",
@@ -43,6 +44,7 @@
         "echarts": "^4.3.0",
         "es6-promise-plugin": "^4.2.2",
         "ngx-echarts": "^4.2.1",
+        "properties": "^1.2.1",
         "rxjs": "~6.5.1",
         "tslib": "^1.9.0",
         "zone.js": "~0.9.1"
