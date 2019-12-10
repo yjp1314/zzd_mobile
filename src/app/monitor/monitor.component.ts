@@ -21,4 +21,6 @@ export class MonitorPage implements OnInit {
     ngOnInit() {
 
     }
-}
+    viewList(item)
+    {}
+} 

@@ -16,6 +16,8 @@ import { Network } from '@ionic-native/network/ngx';
 import { AppMinimize } from '@ionic-native/app-minimize/ngx';
 import { HttpClientModule } from '@angular/common/http';
 
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+
 // import { TabsPage } from './tabs/tabs.page';
 // import { Tab1Page } from './tab1/tab1.page';
 // import { Tab2Page } from './tab2/tab2.page';
@@ -34,6 +36,7 @@ import { HttpClientModule } from '@angular/common/http';
     IonicStorageModule.forRoot(),
     AppRoutingModule,
     HttpClientModule,
+    FontAwesomeModule,
     IonicModule.forRoot({
       hardwareBackButton: true,
       rippleEffect: false,

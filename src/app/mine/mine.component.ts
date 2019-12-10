@@ -31,17 +31,17 @@ export class MinePage implements OnInit {
     }
 
     ngOnInit() {
-        this.storage.get('loginmsg').then(loginmsg => {
-            if (loginmsg != null) {
-                this.userInfo.id = loginmsg.id;
-                this.userInfo.account = loginmsg.account;
-                this.userInfo.userName = loginmsg.userName;
-            }
-        });
+        // this.storage.get('loginmsg').then(loginmsg => {
+        //     if (loginmsg != null) {
+        //         this.userInfo.id = loginmsg.id;
+        //         this.userInfo.account = loginmsg.account;
+        //         this.userInfo.userName = loginmsg.userName;
+        //     }
+        // });
     }
 
     changePassword() {
-        this.router.navigate(['home/mine/modify-password']);
+        // this.router.navigate(['home/mine/modify-password']);
     }
 
     loginOut() {

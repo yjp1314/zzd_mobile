@@ -15,9 +15,9 @@ export class LoginPage implements OnInit {
     showBackButton = false;
     loading = false;
     model = {
-        account: '',
-        password: '',
-        imeiCode: '123456789741963'
+        account: '13889412080',
+        password: '111111',
+        imeiCode: '147852963789456'
     };
     constructor(public nav: NavController,
         public helper: Helper,
@@ -30,26 +30,26 @@ export class LoginPage implements OnInit {
 
     }
 
-    autoLogin() {
-        this.auth.login(this.model.account, this.model.password, this.model.imeiCode).subscribe(res => {
-            console.log(res.isSuccess)
-            if (res.isSuccess) {
-                this.storage.set('loginmsg', { 'account': this.model.account, 'password': this.model.password, 'imeiCode': this.model.imeiCode });
-                this.loading = false;
-                setTimeout(() => {
-                    this.nav.navigateRoot('/home/main');
-                }, 1000);
-            } else {
-                this.loading = false;
-                this.helper.toast('手机号或密码错误,请重试！', 2000, 'bottom');
-                return;
-            }
-        }, () => {
-            this.loading = false;
-            this.helper.toast('系统错误,请联系管理员！', 2000, 'bottom');
-            return;
-        });
-    }
+    // autoLogin() {
+    //     this.auth.login(this.model.account, this.model.password, this.model.imeiCode).subscribe(res => {
+    //         console.log(res.isSuccess)
+    //         if (res.isSuccess) {
+    //             this.storage.set('loginmsg', { 'account': this.model.account, 'password': this.model.password, 'imeiCode': this.model.imeiCode });
+    //             this.loading = false;
+    //             setTimeout(() => {
+    //                 this.nav.navigateRoot('/home/main');
+    //             }, 1000);
+    //         } else {
+    //             this.loading = false;
+    //             this.helper.toast('手机号或密码错误,请重试！', 2000, 'bottom');
+    //             return;
+    //         }
+    //     }, () => {
+    //         this.loading = false;
+    //         this.helper.toast('系统错误,请联系管理员！', 2000, 'bottom');
+    //         return;
+    //     });
+    // }
     formSubmit() {
         if (this.model.account.length === 0) {
             this.helper.toast('手机号不能为空！', 2000, 'bottom');
