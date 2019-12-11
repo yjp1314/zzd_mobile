@@ -19,8 +19,8 @@ export class MonitorTemperaturePage implements OnInit {
     station_info = {
         station_name: "",
         station_code: "",
-        east_longitude: "121°44'",
-        northern_latitude: "38°43'",
+        east_longitude: "122.803",
+        northern_latitude: "39.063",
     }
     ec: any = echarts;
     temperatureChart: any;
@@ -29,8 +29,11 @@ export class MonitorTemperaturePage implements OnInit {
     seaTemperature = [];
     temperatureDay = [];
     temperatureMonth = [];
+    interval: any;
 
     constructor(
+        public helper: Helper,
+        public service: MonitorService,
         public route: ActivatedRoute) {
 
     }
@@ -40,27 +43,60 @@ export class MonitorTemperaturePage implements OnInit {
             this.station_info.station_name = data.stationName;
             this.station_info.station_code = data.stationCode;
         });
-
-        this.getSeaTemperatureData();
+        let that = this;
+        that.getSeaTemperatureData();
         this.getTemperatureData();
+        this.interval = setInterval(function () {
+            console.log("TEST TIME:", new Date());
+            that.getSeaTemperatureData();
+        }, 1000 * 60 * 5);//
+    }
+
+    ngOnDestroy(){
+        this.ec = null;
+        this.temperatureChart = null;
+        this.chartSeaTemperatureOption = null;
+        this.chartTemperatureOption = null;
+        this.seaTemperature = [];
+        this.temperatureDay = [];
+        this.temperatureMonth = [];
+        clearInterval(this.interval);
     }
 
     getSeaTemperatureData() {
+        let now = new Date();
+        let today = now.getFullYear() + "-" + (now.getMonth() + 1) + "-" + now.getDate();
+        this.service.getSeaTemperature(this.station_info.station_code, today).subscribe(res => {
+            console.log(res);
+            if (res.isSuccess) {
+                this.seaTemperature = res.data;
+                this.generateSeaTemperatureChart();
+            }
+            else {
+                this.helper.toast('没有海水温度信息，请联系管理员！', 2000, 'bottom');
+                this.helper.hideLoading();
+                return;
+            }
+        }, () => {
+            this.helper.toast('海水温度信息获取错误，请联系管理员！', 2000, 'bottom');
+            this.helper.hideLoading();
+            return;
+        });
         //模拟数据
-        this.seaTemperature = [{ time: '00:00', t3: 138, t6: 136, t9: 115, t12: 135, t20: 120 },
-        { time: '02:00', t3: 138, t6: 136, t9: 120, t12: 135, t20: 120 },
-        { time: '04:00', t3: 120, t6: 115, t9: 122, t12: 138, t20: 122 },
-        { time: '06:00', t3: 115, t6: 110, t9: 125, t12: 129, t20: 118 },
-        { time: '08:00', t3: 118, t6: 122, t9: 127, t12: 125, t20: 112 },
-        { time: '10:00', t3: 110, t6: 117, t9: 130, t12: 122, t20: 105 },
-        { time: '12:00', t3: 125, t6: 136, t9: 124, t12: 118, t20: 116 },
-        { time: '14:00', t3: 130, t6: 105, t9: 122, t12: 128, t20: 118 },
-        { time: '16:00', t3: 140, t6: 120, t9: 118, t12: 111, t20: 124 },
-        { time: '18:00', t3: 138, t6: 127, t9: 108, t12: 105, t20: 130 },
-        { time: '20:00', t3: 128, t6: 130, t9: 122, t12: 114, t20: 138 },
-        { time: '22:00', t3: 120, t6: 134, t9: 124, t12: 120, t20: 140 }];
+        // this.seaTemperature = [{ time: '00:00', t3: 138, t6: 136, t9: 115, t12: 135, t20: 120 },
+        // { time: '02:00', t3: 138, t6: 136, t9: 120, t12: 135, t20: 120 },
+        // { time: '04:00', t3: 120, t6: 115, t9: 122, t12: 138, t20: 122 },
+        // { time: '06:00', t3: 115, t6: 110, t9: 125, t12: 129, t20: 118 },
+        // { time: '08:00', t3: 118, t6: 122, t9: 127, t12: 125, t20: 112 },
+        // { time: '10:00', t3: 110, t6: 117, t9: 130, t12: 122, t20: 105 },
+        // { time: '12:00', t3: 125, t6: 136, t9: 124, t12: 118, t20: 116 },
+        // { time: '14:00', t3: 130, t6: 105, t9: 122, t12: 128, t20: 118 },
+        // { time: '16:00', t3: 140, t6: 120, t9: 118, t12: 111, t20: 124 },
+        // { time: '18:00', t3: 138, t6: 127, t9: 108, t12: 105, t20: 130 },
+        // { time: '20:00', t3: 128, t6: 130, t9: 122, t12: 114, t20: 138 },
+        // { time: '22:00', t3: 120, t6: 134, t9: 124, t12: 120, t20: 140 }];
 
-        this.generateSeaTemperatureChart();
+        // this.generateSeaTemperatureChart();
     }
     getTemperatureData() {
         this.temperatureDay = [{ time: '00:00', t: 28 },
@@ -178,23 +214,48 @@ export class MonitorTemperaturePage implements OnInit {
     }
     generateSeaTemperatureChart() {
         let seaTemparatureTime = this.seaTemperature.map(function (item) {
-            return item.time;
+            let tc = new Date(item.time);
+            let hours = (tc.getHours() > 9) ? tc.getHours() : "0" + tc.getHours();
+            let minutes = (tc.getMinutes() > 9) ? tc.getMinutes() : "0" + tc.getMinutes();
+            return hours + ":" + minutes;
         });
         let seaTemparature3 = this.seaTemperature.map(function (item) {
-            return item.t3;
+            return (item.t3);
         });
         let seaTemparature6 = this.seaTemperature.map(function (item) {
-            return item.t6;
+            return (item.t6);
         });
         let seaTemparature9 = this.seaTemperature.map(function (item) {
-            return item.t9;
+            return (item.t9);
         });
         let seaTemparature12 = this.seaTemperature.map(function (item) {
-            return item.t12;
+            return (item.t12);
         });
         let seaTemparature20 = this.seaTemperature.map(function (item) {
-            return item.t20;
+            return (item.t20);
         });
+        let tempSort3 = seaTemparature3.sort((n1, n2) => n1 - n2); console.log("tempSort3:", tempSort3);
+        let tempSort6 = seaTemparature6.sort((n1, n2) => n1 - n2); console.log("tempSort6:", tempSort6);
+        let tempSort9 = seaTemparature9.sort((n1, n2) => n1 - n2); console.log("tempSort9:", tempSort9);
+        let tempSort12 = seaTemparature12.sort((n1, n2) => n1 - n2); console.log("tempSort12:", tempSort12);
+        let tempSort20 = seaTemparature20.sort((n1, n2) => n1 - n2); console.log("tempSort20:", tempSort20);
+
+        let tempMin: number[] = [];// = [tempSort3[0] / 1.0, tempSort6[0] / 1.0, tempSort9[0] / 1.0, tempSort12[0] / 1.0, tempSort20[0] / 1.0]; console.log("tempMin:", tempMin);
+        let tempMax: number[] = [];// = [tempSort3[tempSort3.length - 1] / 1.0, tempSort6[tempSort6.length - 1] / 1.0, tempSort9[tempSort9.length - 1] / 1.0, tempSort12[tempSort12.length - 1] / 1.0, tempSort20[tempSort20.length - 1] / 1.0];
+        //console.log("tempMax:", tempMax);
+        if ((tempSort3[0])) tempMin.push(tempSort3[0]);
+        if ((tempSort6[0])) tempMin.push(tempSort6[0]);
+        if ((tempSort9[0])) tempMin.push(tempSort9[0]);
+        if ((tempSort12[0])) tempMin.push(tempSort12[0]);
+        if ((tempSort20[0])) tempMin.push(tempSort20[0]);
+        if ((tempSort3[tempSort3.length - 1])) tempMax.push(tempSort3[tempSort3.length - 1]);
+        if ((tempSort6[tempSort6.length - 1])) tempMax.push(tempSort6[tempSort6.length - 1]);
+        if ((tempSort9[tempSort9.length - 1])) tempMax.push(tempSort9[tempSort9.length - 1]);
+        if ((tempSort12[tempSort12.length - 1])) tempMax.push(tempSort12[tempSort12.length - 1]);
+        if ((tempSort20[tempSort20.length - 1])) tempMax.push(tempSort20[tempSort20.length - 1]);
+        let tempMinSort = tempMin.sort((n1, n2) => n1 - n2); console.log("tempMinSort:", tempMinSort, tempMinSort[0]);
+        let tempMaxSort = tempMax.sort((n1, n2) => n1 - n2); console.log("tempMaxSort:", tempMaxSort, tempMaxSort[tempMaxSort.length - 1]);
+
         // let tempTime = (new Date()).getTime();
         // let tempCount = 0;
         // this.seaTemperature.forEach((element) => {
@@ -241,6 +302,10 @@ export class MonitorTemperaturePage implements OnInit {
                 type: 'value',
                 scale: true,
                 boundaryGap: [0, '100%'],
+                min: tempMinSort[0] - 0.5,
+                max: tempMaxSort[tempMaxSort.length - 1] + 0.5,
+                minInterval: 0.1,
+                splitNumber: 5, // (tempMaxSort[tempMaxSort.length -1] - tempMinSort[0])/0.5,
                 splitLine: {
                     show: false
                 }
