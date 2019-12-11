@@ -39,8 +39,8 @@ export class HttpService extends HttpHelper {
             url: url,
             body,
             headers: new HttpHeaders({
-                'Content-Type': 'application/json; charset=UTF-8'
-            })
+                'Content-Type': 'application/json; charset=UTF-8' 
+            } )
         };
         return this.doRequest(options, setting);
     }
