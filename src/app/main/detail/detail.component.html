@@ -1,0 +1,18 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title style="background: linear-gradient(to right, #1f96ff , #00569F);">
+      <span style="color: white">新闻详细</span>
+    </ion-title>
+    <ion-buttons style="float:left;">
+      <button ion-button small icon-only clear (click)="viewList()" style="background-color:rgba(0,0,0,0)">
+        <span style="color: white; font-size: 12px;font-weight: bolder;">返回</span>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="aui-scrollView">
+  <div class="newsTitle">{{noticeInfo.Title}} </div>
+  <div class="newsTime">发布时间：{{noticeInfo.CreationTime | date:"yyyy-MM-dd HH:mm"}}</div>
+  <div class="newsContext" [innerHTML]="assembleHTML(noticeInfo.NewsContent)"> </div>
+  <div class="newsAuthor">作者：{{noticeInfo.NewsAuthor}}</div>
+</ion-content>

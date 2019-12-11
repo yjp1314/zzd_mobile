@@ -16,14 +16,11 @@ import { Network } from '@ionic-native/network/ngx';
 import { AppMinimize } from '@ionic-native/app-minimize/ngx';
 import { HttpClientModule } from '@angular/common/http';
 
- 
+import { UniqueDeviceID } from '@ionic-native/unique-device-id/ngx';
+import { Uid } from '@ionic-native/uid/ngx';
+import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
 
-// import { TabsPage } from './tabs/tabs.page';
-// import { Tab1Page } from './tab1/tab1.page';
-// import { Tab2Page } from './tab2/tab2.page';
-// import { Tab3Page } from './tab3/tab3.page';
-// import { DemoPage } from './demo/demo.page';
-// import { MinePage } from './mine/mine.page';
+
 
 @NgModule({
   declarations: [AppComponent
@@ -54,6 +51,9 @@ import { HttpClientModule } from '@angular/common/http';
     InAppBrowser,
     Network,
     AppMinimize,
+    UniqueDeviceID,
+    Uid,
+    AndroidPermissions,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]
