@@ -108,7 +108,7 @@ export class WeatherListPage implements OnInit {
     }
 
     viewDetail(weatherId) {
-        this.nav.navigateRoot(['/home/weather'], {
+        this.nav.navigateRoot(['/home/weather/detail'], {
             queryParams: {
                 weatherId: weatherId
             }
@@ -122,6 +122,6 @@ export class WeatherListPage implements OnInit {
     }
     
     goBack(){
-        this.nav.navigateBack("/home/weather/type");
+        this.nav.navigateBack("/home/weather");
     }
 }
