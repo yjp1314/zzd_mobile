@@ -34,7 +34,10 @@ export class MainPage implements OnInit {
     }
 
     bindNotice() {
+        this.noticeList=[];
+        // this.service.getNotice({
 
+        // })
     }
 
     bindPic() {
@@ -47,7 +50,7 @@ export class MainPage implements OnInit {
         this.service.getPictures(params).subscribe(res => {
             if (res.isSuccess) {
                 res.data.forEach(element => {
-                    element.imgUrl = PIC_FILE_PATH + element.imgUrl;
+                    element.imgUrl = element.imgUrl;
                 });
                 this.imgList = res.data;
             }
