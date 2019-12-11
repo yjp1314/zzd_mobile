@@ -1,0 +1,55 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title style="background: linear-gradient(to right, #66cdff , #1f96ff);">
+      <span style="color: white">数据监测</span>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <div class="tab-panel">
+    <div class="tab-panel-item tab-active">
+      <div class="aui-text-title">
+        <h2><span>{{station_info.station_name}}</span></h2>        
+      </div>
+    </div>
+    <ion-segment (ionChange)="segmentChanged($event)" class="tab-nav b-line" style="padding-top: 5px;">
+        <ion-segment-button class="tab-nav-item" value="2" *ngIf="currentDeep != '2'">
+            <ion-label>2m</ion-label>
+        </ion-segment-button>
+        <ion-segment-button class="tab-nav-item tab-active" value="2" *ngIf="currentDeep == '2'">
+            <ion-label>2m</ion-label>
+        </ion-segment-button>
+        <ion-segment-button class="tab-nav-item" value="6" *ngIf="currentDeep != '6'">
+            <ion-label>6m</ion-label>
+        </ion-segment-button>
+        <ion-segment-button class="tab-nav-item tab-active" value="6" *ngIf="currentDeep == '6'">
+            <ion-label>6m</ion-label>
+        </ion-segment-button>
+        <ion-segment-button class="tab-nav-item" value="12" *ngIf="currentDeep != '12'">
+            <ion-label>12m</ion-label>
+        </ion-segment-button>
+        <ion-segment-button class="tab-nav-item tab-active" value="12" *ngIf="currentDeep == '12'">
+            <ion-label>12m</ion-label>
+        </ion-segment-button>
+        <ion-segment-button class="tab-nav-item" value="16" *ngIf="currentDeep != '16'">
+            <ion-label>16m</ion-label>
+        </ion-segment-button>
+        <ion-segment-button class="tab-nav-item tab-active" value="16" *ngIf="currentDeep == '16'">
+            <ion-label>16m</ion-label>
+        </ion-segment-button>
+        <ion-segment-button class="tab-nav-item" value="30" *ngIf="currentDeep != '30'">
+            <ion-label>30m</ion-label>
+        </ion-segment-button>
+        <ion-segment-button class="tab-nav-item tab-active" value="30" *ngIf="currentDeep == '30'">
+            <ion-label>30m</ion-label>
+        </ion-segment-button>
+    </ion-segment>
+    <div>
+        <span style="color: darkorange;">以下数据尚无法获取，此图为模拟数据</span>
+      <div class="panel-chart" echarts [options]="chartSeaCurrentOption" id="currentChart"></div>
+    </div>   
+    
+  </div>
+</ion-content>

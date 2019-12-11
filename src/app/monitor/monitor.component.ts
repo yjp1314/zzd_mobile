@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Events, NavController } from '@ionic/angular';
 import { Utils } from '../providers/Utils';
 import { NativeService } from '../providers/NativeService';
 import { Helper } from '../providers/Helper';
@@ -15,12 +16,28 @@ import { GlobalData } from '../providers/GlobalData';
 
 export class MonitorPage implements OnInit {
 
-    constructor() {
+    constructor(
+        public nav: NavController) {
 
     }
     ngOnInit() {
 
     }
-    viewList(item)
-    {}
+    viewTemperature(stationName,stationcode)
+    {
+        this.nav.navigateForward(['/home/monitor/temperature'], {
+            queryParams: {
+                stationName: stationName,
+                stationCode: stationcode
+            }
+        });
+    }
+    viewCurrent(stationName,equipmentId){
+        this.nav.navigateForward(['/home/monitor/current'], {
+            queryParams: {
+                stationName: stationName,
+                equipmentId: equipmentId
+            }
+        });
+    }
 } 

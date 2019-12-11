@@ -24,6 +24,16 @@ const routes: Routes = [
                         path: '',
                         loadChildren: () =>
                             import('../monitor/monitor.module').then(m => m.MonitorPageModule)
+                    },                    
+                    {
+                        path: 'temperature',
+                        loadChildren: () =>
+                            import('../monitor_temperature/monitor_temperature.module').then(m => m.MonitorTemperaturePageModule)
+                    },                    
+                    {
+                        path: 'current',
+                        loadChildren: () =>
+                            import('../monitor_current/monitor_current.module').then(m => m.MonitorCurrentPageModule)
                     }
                 ]
             },

@@ -10,17 +10,25 @@
 
   <div class="tab-panel">
     <div class="tab-panel-item tab-active">
-        <div class="aui-text-title">
-          <h2><span>{{station_info.station_name}}</span></h2>
-          <p><span>东经：{{station_info.east_longitude}}</span> <span>北纬：{{station_info.northern_latitude}}</span></p>
-        </div>
+      <div class="aui-text-title">
+        <h2><span>{{station_info.station_name}}</span></h2>
+        <p><span>东经：{{station_info.east_longitude}}</span> <span>北纬：{{station_info.northern_latitude}}</span></p>
+      </div>
     </div>
-    <ion-list no-margin>
-      <ion-item>
-          <div class="aui-chart" id="temperatureChart"></div>
-      </ion-item>
-      <ion-item>
-      </ion-item>
-    </ion-list>
+
+    <div>
+      <div class="panel-chart" echarts [options]="chartSeaTemperatureOption"></div>
+    </div>
+    
+    <div>
+      <div>
+        <span style="color: darkorange;">以下数据尚无法获取，此图为模拟数据</span>
+        <ul>
+          <li>当前气温：29.8°C  当前最高气温：29.8°C</li>
+          <li>历史平均气温：28.8°C  当前最低气温：27.6°C</li>
+        </ul>
+      </div>
+      <div class="panel-chart" echarts [options]="chartTemperatureOption"></div>
+    </div>
   </div>
 </ion-content>
