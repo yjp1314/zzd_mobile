@@ -32,16 +32,27 @@ export class AppComponent {
   }
 
   initializeApp() {
-    this.uniqueDeviceID.get()
-      .then((uuid: any) => {
-        console.log(uuid);
-        this.helper.toast(uuid, 2000, 'bottom');
-      })
+
     this.platform.ready().then(() => {
+      this.pop()
       this.nav.navigateRoot('/login');
       this.native.setStatusBarStyle();
       this.native.hideSplashScreen();
       // this.versionService.checkVersion();
     });
+  }
+  // this.uniqueDeviceID.get()
+  // .then((uuid: any) => {
+  //   console.log(uuid);
+  //   this.helper.toast(uuid, 2000, 'bottom');
+  // })
+
+  pop() {
+    // this.helper.toast("uuid", 5000, 'bottom');
+    // this.uniqueDeviceID.get()
+    //   .then((uuid: any) => {
+    //     console.log(uuid);
+    //     this.helper.toast(uuid, 2000, 'bottom');
+    //   })
   }
 }

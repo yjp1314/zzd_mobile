@@ -15,8 +15,8 @@ export class LoginPage implements OnInit {
     showBackButton = false;
     loading = false;
     model = {
-        account: '',
-        password: '',
+        account: '13889412080',
+        password: '111111',
         imeiCode: '147852963789456'
     };
     constructor(public nav: NavController,
