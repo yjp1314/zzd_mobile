@@ -16,4 +16,10 @@ export class MonitorService {
     public get(params) {
         return this.http.post('', params);
     }
+    public getSeaTemperature(stationCode:any, date:any){
+        return this.http.post('SeaTemperature/GetSeaTemperatureByToday', {
+            'stationCode': stationCode,
+            'queryDateTime': date
+        });
+    }
 }
