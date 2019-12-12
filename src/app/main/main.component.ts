@@ -3,7 +3,7 @@ import { Utils } from '../providers/Utils';
 import { MainService } from '../services/main.service';
 import { Storage } from '@ionic/storage';
 import { PIC_FILE_PATH } from '../providers/constant';
-import {   NavController } from '@ionic/angular';
+import { NavController } from '@ionic/angular';
 @Component({
     selector: 'app-main',
     templateUrl: './main.component.html',
@@ -20,18 +20,20 @@ export class MainPage implements OnInit {
     weather = {
         context: ''
     }
-    constructor(public service: MainService, public storage: Storage,public nav:NavController) {
-
+    constructor(public service: MainService, public storage: Storage, public nav: NavController) {
+        this.userInfo.companyId = localStorage.getItem("companyid");
     }
     ngOnInit() {
-        this.storage.get('loginmsg').then(loginmsg => {
-            if (loginmsg != null) {
-                this.userInfo.companyId = loginmsg.companyId;
-                this.bindNotice();
-                this.bindPic();
-                this.bindWeather();
-            }
-        });
+
+        // this.storage.get('loginmsg').then(loginmsg => {
+        //     if (loginmsg != null) {
+        //         this.userInfo.companyId = loginmsg.companyId;
+
+        //     }
+        // });
+        this.bindNotice();
+        this.bindPic();
+        this.bindWeather();
     }
 
     bindNotice() {

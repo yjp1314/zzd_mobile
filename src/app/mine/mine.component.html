@@ -1,26 +1,29 @@
-
 <ion-header>
   <ion-toolbar>
-      <ion-title style="background: linear-gradient(to right, #1f96ff , #00569F);">
-          <span style="color: white">我 的</span>
-      </ion-title>
+    <ion-title style="background: linear-gradient(to right, #1f96ff , #00569F);">
+      <span style="color: white">我 的</span>
+    </ion-title>
   </ion-toolbar>
 </ion-header>
-  
+
 
 <div class="limiter">
   <div class="container-login100">
     <div class="wrap-login100">
-      <div class="list">
-        <div class="item item-divider">
-          <div class="title">用户名</div>
-          <div class="content">{{userInfo.userName}}</div>
-        </div>
-        <div class="item item-divider">
-          <div class="title">电话号</div>
-          <div class="content">{{userInfo.account}}</div>
-        </div>
-      </div>
+      <ion-list>
+        <ion-item  class="basicInfo">
+          <ion-label>基础信息</ion-label>
+        </ion-item>
+
+        <ion-item>
+          <ion-label class="label">用户名:</ion-label>
+          <ion-label class="val">{{userInfo.userName}} </ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label class="label">手机号:</ion-label>
+          <ion-label class="val">{{userInfo.account}}</ion-label>
+        </ion-item>
+      </ion-list>
 
       <div class="container-login100-form-btn" style="margin-top:200px; margin-bottom:20px; ">
         <button class="login100-form-btn" (click)="changePassword()">修改密码</button>
@@ -30,4 +33,4 @@
       </div>
     </div>
   </div>
-</div>  
+</div>

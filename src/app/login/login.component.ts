@@ -71,6 +71,7 @@ export class LoginPage implements OnInit {
                     'userType': res.data[0].userType,
                     'imeiCode': res.data[0].imeiCode
                 });
+                localStorage.setItem("companyid",res.data[0].companyId);
                 this.loading = false;
                 this.nav.navigateRoot('/home/main');
             } else {

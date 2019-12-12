@@ -272,7 +272,10 @@ export class MonitorTemperaturePage implements OnInit {
         // this.temperatureChart = this.ec.init(document.getElementById('temperatureChart'))
         this.chartSeaTemperatureOption = {
             title: {
-                text: '海水温度变化图'
+                text: '海水温度变化图',
+                x:'center',
+                y: 'top',
+                padding: 5,
             },
             tooltip: {
                 trigger: 'axis',
@@ -286,9 +289,10 @@ export class MonitorTemperaturePage implements OnInit {
                 // }
             },
             legend: {
-                orient: 'vertical',
-                right: '20%',
-                data: ['3m', '6m', '9m', '12m', '20m']
+                orient: 'horizontal',
+                // right: '20%',
+                data: ['3m', '6m', '9m', '12m', '20m'],
+                y:"bottom"
             },
             xAxis: {
                 type: 'category',
