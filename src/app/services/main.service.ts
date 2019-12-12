@@ -22,7 +22,12 @@ export class MainService {
     }
 
     public getNotice(params) {
-        return this.http.post('', params);
+        return this.http.post('notice/GetAll', params);
+    }
+
+    public getDetail(params)
+    {
+        return this.http.post('notice/GetNoticeDetail',params)
     }
     public getPictures(params) {
         return this.http.post('cpicture/GetPictrues', params);

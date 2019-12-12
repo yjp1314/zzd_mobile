@@ -6,18 +6,6 @@
   </ion-toolbar>
 </ion-header>
 <ion-content class="aui-scrollView">
-  <!-- <div class="sec_notice">
-    <div class="wrap-notice">
-      <div class="shouRight">
-        <ul class="slideTopbox" slide-scroll style="top:0px;">
-          <li><a href="#">习近平会见菲律宾总统杜特尔特</a></li>
-          <li><a href="#">国庆70周年之际，习近平将亲自颁授国家勋章</a></li>
-          <li><a href="#">奋力走好新时代的长征路 升级摩擦于事无补</a></li>
-          <li><a href="#">中国有能力消化经贸磋商影响 </a></li>
-        </ul>
-      </div>
-    </div>
-  </div> -->
   <div class="sec_picture">
     <div class="wrap-pic">
       <div class="container">
@@ -28,10 +16,20 @@
       </div>
     </div>
   </div>
+  <div class="sec_notice">
+    <div class="wrap-notice">
+      <div class="shouRight">
+        <ul class="slideTopbox" slide-scroll style="top:0px;" *ngFor="let item of  noticeList"
+          (click)="viewDetail(item.id)">
+          <li>{{item.title}}</li>
+        </ul>
+      </div>
+    </div>
+  </div>
   <!-- <div class="sec_weather">
       <div class="wrap-weather">
           weather
         </div> 
   </div> -->
-  
+
 </ion-content>
