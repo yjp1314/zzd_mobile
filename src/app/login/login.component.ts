@@ -62,16 +62,12 @@ export class LoginPage implements OnInit {
         this.loading = true;
         this.auth.login(this.model.account, this.model.password, this.model.imeiCode).subscribe(res => {
             if (res.isSuccess) {
-                this.storage.set('loginmsg', {
-                    'id': res.data[0].id,
-                    'account': this.model.account,
-                    'password': this.model.password,
-                    'userName': res.data[0].userName,
-                    'companyId': res.data[0].companyId,
-                    'userType': res.data[0].userType,
-                    'imeiCode': res.data[0].imeiCode
-                });
+                localStorage.setItem("id",res.data[0].id);
+                localStorage.setItem("account",this.model.account);
+                localStorage.setItem("password",this.model.password);
+                localStorage.setItem("userName",res.data[0].userName);
                 localStorage.setItem("companyid",res.data[0].companyId);
+                localStorage.setItem("imeiCode",res.data[0].imeiCode);
                 this.loading = false;
                 this.nav.navigateRoot('/home/main');
             } else {

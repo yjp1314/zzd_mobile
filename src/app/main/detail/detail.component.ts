@@ -32,26 +32,19 @@ export class DetailComponent implements OnInit, OnDestroy {
     public storage: Storage,
     public sanitizer: DomSanitizer
   ) {
-
-
+    this.userInfo.companyId = localStorage.getItem("companyid");
   }
 
   ngOnInit() {
 
     this.route.queryParams.subscribe((data) => {
-      console.log("Params:", data);
       this.noticeInfo.id = data.id;
 
       if (this.noticeInfo.id > 0) {
         this.getDetail();
       }
     });
-    this.storage.get('loginmsg').then(loginmsg => {
-      if (loginmsg != null) {
-        this.userInfo.companyId = loginmsg.companyId;
-      }
 
-    });
 
   }
   getDetail() {

@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { Events, AlertController } from '@ionic/angular';
 import { Helper } from '../providers/Helper';
 import { NativeService } from '../providers/NativeService';
-import {MineService  } from '../services/mine.service';
+import { MineService } from '../services/mine.service';
 import { Storage } from '@ionic/storage';
 
 @Component({
@@ -27,17 +27,13 @@ export class MinePage implements OnInit {
         public service: MineService,
         public storage: Storage
     ) {
-
+        this.userInfo.id = localStorage.getItem("id");
+        this.userInfo.account = localStorage.getItem("account");
+        this.userInfo.userName = localStorage.getItem("userName");
     }
 
     ngOnInit() {
-        this.storage.get('loginmsg').then(loginmsg => {
-            if (loginmsg != null) {
-                this.userInfo.id = loginmsg.id;
-                this.userInfo.account = loginmsg.account;
-                this.userInfo.userName = loginmsg.userName;
-            }
-        });
+       
     }
 
     changePassword() {
@@ -54,7 +50,12 @@ export class MinePage implements OnInit {
             },
             {
                 text: '退出', handler: () => {
-                    this.storage.remove('loginmsg');
+                    localStorage.removeItem("id"); 
+                    localStorage.removeItem("account");
+                    localStorage.removeItem("password");
+                    localStorage.removeItem("userName");
+                    localStorage.removeItem("companyid");
+                    localStorage.removeItem("imeiCode");
                     this.router.navigate(['login']);
                 }
             }]

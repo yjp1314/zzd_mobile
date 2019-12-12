@@ -33,17 +33,18 @@ export class WeatherTypePage implements OnInit {
         public nav: NavController,
         public service: WeatherService,
         public storage: Storage) {
+            this.userInfo.companyId = localStorage.getItem("companyid");
     }
 
     ngOnInit() {
-        this.storage.get('loginmsg').then(loginmsg => {
-            if (loginmsg != null) {
-                console.log("loginmsg:", loginmsg);
-                console.log("CompanyID:", loginmsg.companyId);
-                this.userInfo.companyId = loginmsg.companyId;
-            }
-            // this.getlastWeather();
-        });
+        // this.storage.get('loginmsg').then(loginmsg => {
+        //     if (loginmsg != null) {
+        //         console.log("loginmsg:", loginmsg);
+        //         console.log("CompanyID:", loginmsg.companyId);
+        //         this.userInfo.companyId = loginmsg.companyId;
+        //     }
+        //     // this.getlastWeather();
+        // });
     }
 
     viewList(typeId) {

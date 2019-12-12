@@ -33,6 +33,7 @@ export class WeatherListPage implements OnInit {
         public helper: Helper,
         public service: WeatherService,
         public storage: Storage) {
+        this.userInfo.companyId = localStorage.getItem("companyid");
     }
 
     ngOnInit() {
@@ -41,14 +42,7 @@ export class WeatherListPage implements OnInit {
             this.typeId = data.typeId;
             this.resetTitle();
         });
-        this.storage.get('loginmsg').then(loginmsg => {
-            if (loginmsg != null) {
-                console.log("loginmsg:", loginmsg);
-                console.log("CompanyID:", loginmsg.companyId);
-                this.userInfo.companyId = loginmsg.companyId;
-            }
-            this.getWeathers();
-        });
+        this.getWeathers();
     }
 
     resetTitle() {
@@ -120,8 +114,8 @@ export class WeatherListPage implements OnInit {
         this.currentPageNumber++;
         this.getWeathers(e);
     }
-    
-    goBack(){
+
+    goBack() {
         this.nav.navigateBack("/home/weather");
     }
 }
