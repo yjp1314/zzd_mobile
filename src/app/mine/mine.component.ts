@@ -37,7 +37,7 @@ export class MinePage implements OnInit {
     }
 
     changePassword() {
-        this.router.navigate(['home/mine/modify-password']);
+        this.router.navigate(['/home/mine/change-password']);
     }
 
     loginOut() {

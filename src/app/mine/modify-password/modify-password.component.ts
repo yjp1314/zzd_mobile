@@ -13,9 +13,9 @@ export class ModifyPasswordPage implements OnInit {
     loading = false;
     pswLeave; // 密码强度
     model = {
-        oldPsw: '123456',
-        password: '123456',
-        newPassword: '123456'
+        oldPsw: '',
+        password: '',
+        newPassword: ''
     };
 
     constructor(public router: Router,
@@ -46,7 +46,8 @@ export class ModifyPasswordPage implements OnInit {
         this.pswLeave = Utils.checkPass(value);
     }
 
-    goBack(){
-        this.router.navigate(['home/mine']);
+
+    viewList() {
+        this.router.navigate(['/home/mine']);
     }
 }

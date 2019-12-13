@@ -4,14 +4,16 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MinePage } from './mine.component';
-import { NgxEchartsModule } from 'ngx-echarts';
+import { ModifyPasswordPage } from './modify-password/modify-password.component';
+import { MineRoutingModule } from './mine-routing.module';
 @NgModule({
   imports: [
     IonicModule,
     CommonModule,
     FormsModule,
-    RouterModule.forChild([{ path: '', component: MinePage }]), NgxEchartsModule
+    MineRoutingModule
+    // RouterModule.forChild([{ path: '', component: MinePage }]), NgxEchartsModule
   ],
-  declarations: [MinePage]
+  declarations: [MinePage, ModifyPasswordPage]
 })
 export class MinePageModule { }
