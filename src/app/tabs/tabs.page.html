@@ -1,5 +1,23 @@
 <ion-tabs class="mytabs">
     <ion-tab-bar slot="bottom" class="mytabbar">
+        <ion-tab-button tab="main" class="mytab" routerLink="/home/main">
+            <ion-icon name="home"></ion-icon>
+            <ion-label>首页</ion-label>
+        </ion-tab-button>
+        <ion-tab-button tab="monitor" class="mytab" routerLink="/home/monitor">
+            <ion-icon name="thermometer"></ion-icon>
+            <ion-label>监测</ion-label>
+        </ion-tab-button>
+        <ion-tab-button tab="weather" class="mytab" routerLink="/home/weather">
+            <ion-icon name="rainy"></ion-icon>
+            <ion-label>天气</ion-label>
+        </ion-tab-button>
+        <ion-tab-button tab="mine" class="mytab" routerLink="/home/mine">
+            <ion-icon name="people"></ion-icon>
+            <ion-label>我的</ion-label>
+        </ion-tab-button>
+    </ion-tab-bar>
+    <!-- <ion-tab-bar slot="bottom" class="mytabbar">
         <ion-tab-button tab="main" class="mytab">
             <ion-icon name="home"></ion-icon>
             <ion-label>首页</ion-label>
@@ -14,15 +32,9 @@
         </ion-tab-button>
         <ion-tab-button tab="mine" class="mytab">
             <ion-icon name="people"></ion-icon>
-
             <ion-label>我的</ion-label>
         </ion-tab-button>
-    </ion-tab-bar>
+    </ion-tab-bar> -->
 </ion-tabs>
 
-<!-- <ion-tabs class="mytabs">
-    <ion-tab tabTitle="首页"></ion-tab>
-    <ion-tab tabTitle=""></ion-tab>
-    <ion-tab tabTitle=""></ion-tab>
-    <ion-ta tabTitle=""b></ion-tab>
-</ion-tabs> -->
+ 

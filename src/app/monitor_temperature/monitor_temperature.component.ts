@@ -6,6 +6,7 @@ import { Helper } from '../providers/Helper';
 import { HttpService } from '../providers/HttpService';
 import { GlobalData } from '../providers/GlobalData';
 import { MonitorService } from '../services/monitor.service';
+import { NavController } from '@ionic/angular';
 import * as echarts from 'echarts';
 
 @Component({
@@ -35,7 +36,9 @@ export class MonitorTemperaturePage implements OnInit {
     constructor(
         public helper: Helper,
         public service: MonitorService,
-        public route: ActivatedRoute) {
+        public route: ActivatedRoute,
+        public nav: NavController
+        ) {
 
     }
     ngOnInit() {
@@ -363,4 +366,7 @@ export class MonitorTemperaturePage implements OnInit {
         };
         // this.temperatureChart.setOption(this.chartOption);
     }
+    viewList() {
+        this.nav.back();
+      }
 }

@@ -4,6 +4,8 @@ import { ActivatedRoute } from '@angular/router';
 import { MainService } from '../../services/main.service';
 import { Storage } from '@ionic/storage';
 import { DomSanitizer } from '@angular/platform-browser';
+ 
+
 
 @Component({
   selector: 'app-detail',
@@ -79,10 +81,6 @@ export class DetailComponent implements OnInit, OnDestroy {
 
 
   viewList() {
-    this.nav.navigateForward(['/home/main'], {
-      queryParams: {
-
-      }
-    });
+    this.nav.back();
   }
 }
