@@ -6,7 +6,7 @@
 
 .container-login100 {
   width: 100%;  
-  min-height: 100vh;
+  min-height: 80vh;
   display: -webkit-box;
   display: -webkit-flex;
   display: -moz-box;
@@ -15,7 +15,7 @@
   flex-wrap: wrap;
   justify-content: center;
   align-items:flex-start;
-
+  padding:  0px;
   background-repeat: no-repeat;
   background-size: cover;
   background-position: bottom;
@@ -23,48 +23,20 @@
   z-index: 1;
 }
 
-.container-login100::before {
-  content: "";
-  display: block;
-  position: absolute;
-  z-index: -1;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  opacity: 0.9;
-}
 
 .wrap-login100 {
   display: block;
-  width: 390px;
+  width: 100%; 
   top: 20px;
   left: 10px;
-  right: 10px;
   opacity: 0.9;
   font-size: 14px;
 
 }
 
- 
-
-@-webkit-keyframes anim-shadow {
-  to {
-      box-shadow: 0px 0px 80px 30px;
-      opacity: 0;
-  }
-}
-
-@keyframes anim-shadow {
-  to {
-      box-shadow: 0px 0px 80px 30px;
-      opacity: 0;
-  }
-}
 
 
-
-/*------------------------------------------------------------------
+/*-----------------------------Button-------------------------------------
 [ Button ]*/
 .container-login100-form-btn {
   width: 100%;
@@ -133,11 +105,109 @@
   font-size: 14px;;
   font-weight: bold;
 }
-.label{
-  font-size: 14px;
-}
+
 .val
 {
   font-size: 14px;
   text-align: right;
+  height: 30px;
 }
+.sep{
+  height: 10px;
+  background-color: #000;
+}
+.title{
+  width: 100%;
+  height: 30px;
+  font-weight: bold;;
+  font-size: 14px;
+  border-bottom: 1px solid #999999; 
+  margin-bottom: 15px;
+}
+
+.item{
+  width: 100%;
+  height: 30px;
+  font-size: 14px;
+  border-bottom: 1px solid #999999; 
+  margin-bottom: 15px;
+  display: inline-block;
+  .label{
+    font-size: 14px;
+    float: left;
+    text-align: left;
+    height: 30px;
+  }
+  .val
+    {
+      
+      font-size: 14px;
+      float: right;
+      text-align: right;
+      height: 30px;
+      display: inline-block;
+    }
+}
+
+// $height:40px;           //list的总高度
+//   $content-height:2px;    //list-group-item相对list的差值
+//   .floatCommon {          //左右浮动元素的公共特性
+//     width: 10%;
+//     height: $height - $content-height;
+//     line-height: $height;    //行高与高度保持一致，使其垂直居中
+//     display: inline-block;
+//     text-align: center;
+//     vertical-align: center;
+//     color: #1a8bd4;
+//   }
+//   .list-title
+//   {
+//     width: 100%;
+//     height: 20px;
+//     margin: 0px 0px;
+//     font-weight: bold;
+//   }
+
+//   .list-group{
+//     width: 100%;
+//     height: auto;
+//     border-top: 1px solid #efefef;  //列表项的整体框架边框
+//     border-bottom: 1px solid #efefef;
+//     margin: 10px 0px;
+ 
+//     .list-group-item {
+//       &>.left{
+//         @extend .floatCommon;
+//         float: left;
+//         clear:both;
+//       }
+//       &>.content{
+//         clear: left;
+//         display: inline-block;
+//         width: 90%;
+//         height: $height - $content-height;
+//         line-height: $height - $content-height;
+//         color: #666666;
+//         border-bottom: 1px solid #e8e8e8;
+//         .right{  //嵌套在里面的float-right
+//           display: inline-block;
+//           float: right;
+//           width: 40%;
+//           color: #666666;
+//           text-align: right;
+//         }
+//       }
+//       //外部浮动到right部分的内容
+//       &>.right{
+//         @extend .floatCommon;
+//         float: right;
+//       }
+//       //取消同一list-group-item中最后一个元素的底部边框
+//       &:last-child{
+//         .content{
+//           border-bottom: none;
+//         }
+//       }
+//     }
+//   }
+ 
