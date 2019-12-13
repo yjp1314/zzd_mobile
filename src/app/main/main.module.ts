@@ -4,14 +4,16 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MainPage } from './main.component';
-import { NgxEchartsModule } from 'ngx-echarts';
+import { DetailComponent } from './detail/detail.component';
+import { MainRoutingModule } from './main.routing.module';
+
 @NgModule({
   imports: [
     IonicModule,
     CommonModule,
     FormsModule,
-    RouterModule.forChild([{ path: '', component: MainPage }]), NgxEchartsModule
+    MainRoutingModule
   ],
-  declarations: [MainPage]
+  declarations: [MainPage, DetailComponent]
 })
 export class MainPageModule { }

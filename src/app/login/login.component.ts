@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { mergeMap, timeout } from 'rxjs/operators';
-// import { Storage } from '../../providers/Storage';
 import { Helper } from '../providers/Helper';
-import { NavController } from '@ionic/angular';
 import { HttpService } from '../providers/HttpService';
 import { Storage } from '@ionic/storage';
+import { Router } from '@angular/router';
 @Component({
     selector: 'app-login',
     templateUrl: './login.component.html',
@@ -15,11 +14,12 @@ export class LoginPage implements OnInit {
     showBackButton = false;
     loading = false;
     model = {
-        account: '',
-        password: '',
+        account: '13889412080',
+        password: '111111',
         imeiCode: '147852963789456'
     };
-    constructor(public nav: NavController,
+    constructor(
+        public router: Router,
         public helper: Helper,
         public htttp: HttpService,
         public auth: AuthService,
@@ -62,14 +62,15 @@ export class LoginPage implements OnInit {
         this.loading = true;
         this.auth.login(this.model.account, this.model.password, this.model.imeiCode).subscribe(res => {
             if (res.isSuccess) {
-                localStorage.setItem("id",res.data[0].id);
-                localStorage.setItem("account",this.model.account);
-                localStorage.setItem("password",this.model.password);
-                localStorage.setItem("userName",res.data[0].userName);
-                localStorage.setItem("companyid",res.data[0].companyId);
-                localStorage.setItem("imeiCode",res.data[0].imeiCode);
+                localStorage.setItem("id", res.data[0].id);
+                localStorage.setItem("account", this.model.account);
+                localStorage.setItem("password", this.model.password);
+                localStorage.setItem("userName", res.data[0].userName);
+                localStorage.setItem("companyid", res.data[0].companyId);
+                localStorage.setItem("imeiCode", res.data[0].imeiCode);
                 this.loading = false;
-                this.nav.navigateRoot('/home/main');
+                // this.router.navigateByUrl('/home/main');
+                this.router.navigate(['/home/main']);
             } else {
                 this.loading = false;
                 this.helper.toast(res.errorMessage, 2000, 'bottom');

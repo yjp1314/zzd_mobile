@@ -3,7 +3,7 @@ import { Utils } from '../providers/Utils';
 import { MainService } from '../services/main.service';
 import { Storage } from '@ionic/storage';
 import { PIC_FILE_PATH } from '../providers/constant';
-import { NavController } from '@ionic/angular';
+import { Router } from '@angular/router';
 @Component({
     selector: 'app-main',
     templateUrl: './main.component.html',
@@ -20,7 +20,7 @@ export class MainPage implements OnInit {
     weather = {
         context: ''
     }
-    constructor(public service: MainService, public storage: Storage, public nav: NavController) {
+    constructor(public service: MainService, public storage: Storage, public router: Router) {
         this.userInfo.companyId = localStorage.getItem("companyid");
     }
     ngOnInit() {
@@ -75,7 +75,7 @@ export class MainPage implements OnInit {
     }
 
     viewDetail(item) {
-        this.nav.navigateRoot(['/home/main/detail'], {
+        this.router.navigate(['/home/main/detail'], {
             queryParams: {
                 id: item
             }
