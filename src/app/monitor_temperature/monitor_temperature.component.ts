@@ -27,6 +27,7 @@ export class MonitorTemperaturePage implements OnInit {
     chartSeaTemperatureOption: any;
     chartTemperatureOption: any;
     seaTemperature = [];
+    currentSeaTemperature = { time: "", t3: "", t6: "", t9: "", t12: "", t20: "" }
     temperatureDay = [];
     temperatureMonth = [];
     interval: any;
@@ -52,7 +53,7 @@ export class MonitorTemperaturePage implements OnInit {
         }, 1000 * 60 * 5);//
     }
 
-    ngOnDestroy(){
+    ngOnDestroy() {
         this.ec = null;
         this.temperatureChart = null;
         this.chartSeaTemperatureOption = null;
@@ -70,6 +71,15 @@ export class MonitorTemperaturePage implements OnInit {
             console.log(res);
             if (res.isSuccess) {
                 this.seaTemperature = res.data;
+                let tc = new Date(this.seaTemperature[this.seaTemperature.length - 1].time);
+                let hours = (tc.getHours() > 9) ? tc.getHours() : "0" + tc.getHours();
+                let minutes = (tc.getMinutes() > 9) ? tc.getMinutes() : "0" + tc.getMinutes();
+                this.currentSeaTemperature.time = hours + ":" + minutes;
+                this.currentSeaTemperature.t3 = (this.seaTemperature[this.seaTemperature.length - 1].t3) ? this.seaTemperature[this.seaTemperature.length - 1].t3 : "";
+                this.currentSeaTemperature.t6 = (this.seaTemperature[this.seaTemperature.length - 1].t6) ? this.seaTemperature[this.seaTemperature.length - 1].t6 : "";
+                this.currentSeaTemperature.t9 = (this.seaTemperature[this.seaTemperature.length - 1].t9) ? this.seaTemperature[this.seaTemperature.length - 1].t9 : "";
+                this.currentSeaTemperature.t12 = (this.seaTemperature[this.seaTemperature.length - 1].t12) ? this.seaTemperature[this.seaTemperature.length - 1].t12 : "";
+                this.currentSeaTemperature.t20 = (this.seaTemperature[this.seaTemperature.length - 1].t20) ? this.seaTemperature[this.seaTemperature.length - 1].t20 : "";
                 this.generateSeaTemperatureChart();
             }
             else {
@@ -234,11 +244,16 @@ export class MonitorTemperaturePage implements OnInit {
         let seaTemparature20 = this.seaTemperature.map(function (item) {
             return (item.t20);
         });
-        let tempSort3 = seaTemparature3.sort((n1, n2) => n1 - n2); console.log("tempSort3:", tempSort3);
-        let tempSort6 = seaTemparature6.sort((n1, n2) => n1 - n2); console.log("tempSort6:", tempSort6);
-        let tempSort9 = seaTemparature9.sort((n1, n2) => n1 - n2); console.log("tempSort9:", tempSort9);
-        let tempSort12 = seaTemparature12.sort((n1, n2) => n1 - n2); console.log("tempSort12:", tempSort12);
-        let tempSort20 = seaTemparature20.sort((n1, n2) => n1 - n2); console.log("tempSort20:", tempSort20);
+        let tempSort3 = seaTemparature3.slice(0);
+        let tempSort6 = seaTemparature6.slice(0);
+        let tempSort9 = seaTemparature9.slice(0);
+        let tempSort12 = seaTemparature12.slice(0);
+        let tempSort20 = seaTemparature20.slice(0);
+        tempSort3 = tempSort3.sort((n1, n2) => n1 - n2); console.log("tempSort3:", tempSort3,seaTemparature3);
+        tempSort6 = tempSort6.sort((n1, n2) => n1 - n2); console.log("tempSort6:", tempSort6,seaTemparature6);
+        tempSort9 = tempSort9.sort((n1, n2) => n1 - n2); console.log("tempSort9:", tempSort9,seaTemparature9);
+        tempSort12 = tempSort12.sort((n1, n2) => n1 - n2); console.log("tempSort12:", tempSort12,seaTemparature12);
+        tempSort20 = tempSort20.sort((n1, n2) => n1 - n2); console.log("tempSort20:", tempSort20,seaTemparature20);
 
         let tempMin: number[] = [];// = [tempSort3[0] / 1.0, tempSort6[0] / 1.0, tempSort9[0] / 1.0, tempSort12[0] / 1.0, tempSort20[0] / 1.0]; console.log("tempMin:", tempMin);
         let tempMax: number[] = [];// = [tempSort3[tempSort3.length - 1] / 1.0, tempSort6[tempSort6.length - 1] / 1.0, tempSort9[tempSort9.length - 1] / 1.0, tempSort12[tempSort12.length - 1] / 1.0, tempSort20[tempSort20.length - 1] / 1.0];
@@ -273,7 +288,7 @@ export class MonitorTemperaturePage implements OnInit {
         this.chartSeaTemperatureOption = {
             title: {
                 text: '海水温度变化图',
-                x:'center',
+                x: 'center',
                 y: 'top',
                 padding: 5,
             },
@@ -292,7 +307,7 @@ export class MonitorTemperaturePage implements OnInit {
                 orient: 'horizontal',
                 // right: '20%',
                 data: ['3m', '6m', '9m', '12m', '20m'],
-                y:"bottom"
+                y: "bottom"
             },
             xAxis: {
                 type: 'category',
