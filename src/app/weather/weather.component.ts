@@ -36,6 +36,7 @@ export class WeatherPage implements OnInit {
         public route: ActivatedRoute,
         public events: Events,
         public nav: NavController,
+        public router:Router,
         public helper: Helper,
         public service: WeatherService,
         public storage: Storage) {
@@ -147,12 +148,18 @@ export class WeatherPage implements OnInit {
     viewOther() {
         // this.nav.navigateRoot('/home/weather/type');
         // this.events.publish('jumpTo', 'WeatherTypePage', { id: 11 });
-        this.nav.navigateForward('/home/weather/type');
+        // this.nav.navigateForward('/home/weather/type');
+        this.router.navigate(['/home/weather/type']);
     }
 
     viewList() {
         // this.nav.navigateForward('/home/weather/list');
-        this.nav.navigateForward(['/home/weather/list'], {
+        // this.nav.navigateForward(['/home/weather/list'], {
+        //     queryParams: {
+        //         typeId: this.listType
+        //     }
+        // });
+        this.router.navigate(['/home/weather/list'], {
             queryParams: {
                 typeId: this.listType
             }
