@@ -31,9 +31,10 @@ export class WeatherTypePage implements OnInit {
     constructor(
         public events: Events,
         public nav: NavController,
+        public router:Router,
         public service: WeatherService,
         public storage: Storage) {
-            this.userInfo.companyId = localStorage.getItem("companyid");
+        this.userInfo.companyId = localStorage.getItem("companyid");
     }
 
     ngOnInit() {
@@ -49,14 +50,20 @@ export class WeatherTypePage implements OnInit {
 
     viewList(typeId) {
         // this.nav.navigateForward('/home/weather/list');
-        this.nav.navigateForward(['/home/weather/list'], {
+        // this.nav.navigateForward(['/home/weather/list'], {
+        //     queryParams: {
+        //         typeId: typeId
+        //     }
+        // });
+        this.router.navigate(['/home/weather/list'], {
             queryParams: {
                 typeId: typeId
             }
         });
     }
 
-    goBack(){
-        this.nav.navigateRoot("/home/weather");
+    goBack() {
+        // this.nav.navigateRoot("/home/weather");
+        this.router.navigate(["/home/weather"]);
     }
 }

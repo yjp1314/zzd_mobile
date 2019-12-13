@@ -15,3 +15,59 @@
   text-align: center;
   font-size: 14px;
 }
+.aui-table{
+  padding: 12px;;
+}
+
+.table-nav {
+  height: 40px;
+  line-height: 40px;
+  display: block;
+  position: relative;
+  z-index: 1;
+  width: 90%;
+  margin: 0 auto;
+  background-color: #41b0ff;
+  padding: 0;
+}
+.table-nav-item {
+  height: 40px;
+  line-height: 40px;
+  position: relative;
+  text-align: center;
+  color: #fff;
+  font-size: 1rem;
+  display: block;
+  float: left;
+  width: 16%;
+  border-right: 1px solid #fff;
+}
+.table-item {
+    height: 40px;
+    line-height: 40px;
+    display: block;
+    position: relative;
+    z-index: 1;
+    width: 90%;
+    margin: 0 auto;
+    padding: 0;
+    background-color: #fff;
+    border-left: #d9d9d9 1px solid;
+    border-bottom: #d9d9d9 1px solid;
+}
+.table-info-item {
+    height: 40px;
+    line-height: 40px;
+    position: relative;
+    text-align: center;
+    color: #fff;
+    font-size: 0.7rem;
+    display: block;
+    float: left;
+    width: 16%;
+    border-right: 1px solid #d9d9d9;
+}
+
+.table-item li span {
+    color: #666;
+}

@@ -30,6 +30,7 @@ export class WeatherListPage implements OnInit {
 
     constructor(public route: ActivatedRoute,
         public nav: NavController,
+        public router: Router,
         public helper: Helper,
         public service: WeatherService,
         public storage: Storage) {
@@ -41,8 +42,9 @@ export class WeatherListPage implements OnInit {
             console.log("Params:", data);
             this.typeId = data.typeId;
             this.resetTitle();
+            this.weatherList = [];
+            this.getWeathers();
         });
-        this.getWeathers();
     }
 
     resetTitle() {
@@ -102,7 +104,12 @@ export class WeatherListPage implements OnInit {
     }
 
     viewDetail(weatherId) {
-        this.nav.navigateRoot(['/home/weather/detail'], {
+        // this.nav.navigateRoot(['/home/weather/detail'], {
+        //     queryParams: {
+        //         weatherId: weatherId
+        //     }
+        // });
+        this.router.navigate(['/home/weather/detail'], {
             queryParams: {
                 weatherId: weatherId
             }
@@ -116,6 +123,7 @@ export class WeatherListPage implements OnInit {
     }
 
     goBack() {
-        this.nav.navigateBack("/home/weather");
+        // this.nav.navigateBack("/home/weather");
+        this.router.navigate(["/home/weather"]);
     }
 }

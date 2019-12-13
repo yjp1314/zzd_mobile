@@ -21,14 +21,68 @@
           &nbsp;<span>北纬：{{station_info.northern_latitude}}</span></p>
       </div>
     </div>
-
+    <div class="aui-table">
+      <h5 style="text-align: center;"><span style="font-weight: bolder; margin-left: 5%;">当前海水温度</span></h5>
+      <ul class="table-nav">
+          <li class="table-nav-item" style="width: 20%;">
+            <span>时间</span>
+          </li>
+        <li class="table-nav-item">
+          <span>3m</span>
+        </li>
+        <li class="table-nav-item">
+          <span>6m</span>
+        </li>
+        <li class="table-nav-item">
+          <span>9m</span>
+        </li>
+        <li class="table-nav-item">
+          <span>12m</span>
+        </li>
+        <li class="table-nav-item">
+          <span>20m</span>
+        </li>
+      </ul>
+      <ul class="table-item">
+          <li class="table-info-item" style="width: 20%; background-color: #f4faff; border-bottom: 1px solid #d9d9d9;">
+            <span>
+              {{currentSeaTemperature.time}}
+            </span>
+          </li>
+        <li class="table-info-item">
+          <span>
+            {{currentSeaTemperature.t3}}°C
+          </span>
+        </li>
+        <li class="table-info-item">
+          <span>
+            {{currentSeaTemperature.t6}}°C
+          </span>
+        </li>
+        <li class="table-info-item">
+          <span>
+            {{currentSeaTemperature.t9}}°C
+          </span>
+        </li>
+        <li class="table-info-item">
+          <span>
+            {{currentSeaTemperature.t12}}°C
+          </span>
+        </li>
+        <li class="table-info-item">
+          <span *ngIf="currentSeaTemperature.t20 != ''">
+            {{currentSeaTemperature.t20}}°C
+          </span>
+        </li>
+      </ul>
+    </div>
     <div>
       <div class="panel-chart" echarts [options]="chartSeaTemperatureOption"></div>
     </div>
 
     <div style="margin-top: 15px;;">
       <div>
-        <div style="color: darkorange; text-align: center; ">以下数据尚无法获取，此图为模拟数据</div>
+        <!-- <div style="color: darkorange; text-align: center; ">以下数据尚无法获取，此图为模拟数据</div> -->
         <ul class="temper">
           <li>当前气温：29.8°C 当前最高气温：29.8°C</li>
           <li>历史平均气温：28.8°C 当前最低气温：27.6°C</li>
