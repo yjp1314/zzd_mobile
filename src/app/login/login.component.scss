@@ -175,7 +175,17 @@
     color: #00c6fb;
     padding-left: 23px;
 }
-
+.icon-key{
+    width: 20px;
+    height: 22px;
+    display: block;
+    border: none;
+    float: left;
+    background-size: 13px;
+    background-repeat: no-repeat;
+    background-image: url("../../assets/images/key.png");
+    z-index: 9999; 
+}
 
 .icon-user {
     width: 20px;
@@ -185,7 +195,7 @@
     float: left;
     background-size: 13px;
     background-repeat: no-repeat;
-    background-image: url("../../assets/images/username-icon.png");
+    background-image: url("../../assets/images/mobile.png");
     z-index: 9999;
 }
 
@@ -197,7 +207,7 @@
     float: left;
     background-size: 15px;
     background-repeat: no-repeat;
-    background-image: url("../../assets/images/password-icon.png");
+    background-image: url("../../assets/images/password.png");
     z-index: 9999;
 }
 
