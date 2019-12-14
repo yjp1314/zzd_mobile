@@ -5,6 +5,8 @@ import { Helper } from '../providers/Helper';
 import { HttpService } from '../providers/HttpService';
 import { Storage } from '@ionic/storage';
 import { Router } from '@angular/router';
+import { Uid } from '@ionic-native/uid/ngx';
+import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
 @Component({
     selector: 'app-login',
     templateUrl: './login.component.html',
@@ -23,12 +25,32 @@ export class LoginPage implements OnInit {
         public helper: Helper,
         public htttp: HttpService,
         public auth: AuthService,
-        public storage: Storage) {
+        public storage: Storage,
+        private uid: Uid,
+        private androidPermissions: AndroidPermissions) {            
+        this.getPermission();
     }
 
     ngOnInit() {
 
     }
+    getPermission(){
+        this.androidPermissions.checkPermission(
+          this.androidPermissions.PERMISSION.READ_PHONE_STATE
+        ).then(res => {
+          if(res.hasPermission){
+            
+          }else{
+            this.androidPermissions.requestPermission(this.androidPermissions.PERMISSION.READ_PHONE_STATE).then(res => {
+              alert("Persmission Granted Please Restart App!");
+            }).catch(error => {
+              alert("Error! "+error);
+            });
+          }
+        }).catch(error => {
+          alert("Error! "+error);
+        });
+      }
 
     // autoLogin() {
     //     this.auth.login(this.model.account, this.model.password, this.model.imeiCode).subscribe(res => {
@@ -51,6 +73,8 @@ export class LoginPage implements OnInit {
     //     });
     // }
     formSubmit() {
+        // alert(this.uid.IMEI);
+        // return;
         if (this.model.account.length === 0) {
             this.helper.toast('手机号不能为空！', 2000, 'bottom');
             return;
@@ -60,6 +84,7 @@ export class LoginPage implements OnInit {
             return;
         }
         this.loading = true;
+        this.model.imeiCode = this.uid.IMEI;
         this.auth.login(this.model.account, this.model.password, this.model.imeiCode).subscribe(res => {
             if (res.isSuccess) {
                 localStorage.setItem("id", res.data[0].id);
