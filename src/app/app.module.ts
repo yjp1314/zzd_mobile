@@ -20,10 +20,8 @@ import { UniqueDeviceID } from '@ionic-native/unique-device-id/ngx';
 import { Uid } from '@ionic-native/uid/ngx';
 import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
 
-import { TabsPage } from './tabs/tabs.page'
-
 @NgModule({
-  declarations: [AppComponent,TabsPage
+  declarations: [AppComponent
     // ,TabsPage,Tab1Page,Tab2Page,Tab3Page,DemoPage,MinePage
   ],
   entryComponents: [],
@@ -56,7 +54,7 @@ import { TabsPage } from './tabs/tabs.page'
     AndroidPermissions,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
-  
+
   bootstrap: [AppComponent]
 })
 export class AppModule { }
