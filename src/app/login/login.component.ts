@@ -89,7 +89,7 @@ export class LoginPage implements OnInit {
       return;
     }
     this.loading = true;
-    this.model.imeiCode = this.uid.IMEI;
+    this.model.imeiCode = "869979036090863";//this.uid.IMEI;
     this.auth.login(this.model.account, this.model.password, this.model.imeiCode).subscribe(res => {
       if (res.isSuccess) {
         localStorage.setItem("id", res.data[0].id);

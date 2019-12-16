@@ -19,8 +19,8 @@
     </div>
     <div>
         <ion-list no-margin>
-            <ion-item *ngFor="let weather of weatherList" (click)="viewDetail(weather.id)">
-              <ion-label class="itemlist"><ion-icon name="arrow-round-back" color="red"></ion-icon> {{weather.title}}</ion-label>
+            <ion-item *ngFor="let weather of weatherList" (click)="viewDetail(weather.id)" style="padding:2px 20px 2px 20px;">
+              <ion-label class="itemlist"><ion-icon name="cloud" color="red" style="font-size: larger;margin-right: 10px;"></ion-icon> {{weather.title}}</ion-label>
             </ion-item>
         </ion-list>
       <!-- <ul>
