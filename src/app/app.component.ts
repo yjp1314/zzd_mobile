@@ -28,7 +28,9 @@ export class AppComponent {
     private androidPermissions: AndroidPermissions
 
   ) {
+    this.getPermission();
     this.initializeApp();
+
   }
 
   initializeApp() {
@@ -36,6 +38,25 @@ export class AppComponent {
       this.nav.navigateRoot('/login');
       this.native.setStatusBarStyle();
       this.native.hideSplashScreen();
+    });
+  }
+
+  getPermission() {
+    this.androidPermissions.checkPermission(
+      this.androidPermissions.PERMISSION.READ_PHONE_STATE
+    ).then(res => {
+      if (res.hasPermission) {
+
+      } else {
+        this.androidPermissions.requestPermission(this.androidPermissions.PERMISSION.READ_PHONE_STATE).then(res => {
+          // alert("Persmission Granted Please Restart App!");
+          this.helper.toast('请赋予访问本机设备号的权限！', 2000, 'bottom');
+        }).catch(error => {
+          this.helper.toast('请赋予访问本机设备号的权限！', 2000, 'bottom');
+        });
+      }
+    }).catch(error => {
+      this.helper.toast('请赋予访问本机设备号的权限！', 2000, 'bottom');
     });
   }
 }

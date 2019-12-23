@@ -18,7 +18,7 @@ export class LoginPage implements OnInit {
   model = {
     account: '',
     password: '',
-    imeiCode: ''
+    imeiCode: '' //865547047765809
   };
   constructor(
     public router: Router,
@@ -28,34 +28,16 @@ export class LoginPage implements OnInit {
     public storage: Storage,
     private uid: Uid,
     private androidPermissions: AndroidPermissions) {
-    this.getPermission();
+  
   }
 
   ngOnInit() {
-    setTimeout(() => {
-      this.model.imeiCode = this.uid.IMEI;
-    }, 1000);
+    // setTimeout(() => {
+    //   this.model.imeiCode = this.uid.IMEI;
+    // }, 1000);
 
   }
-  getPermission() {
-    this.androidPermissions.checkPermission(
-      this.androidPermissions.PERMISSION.READ_PHONE_STATE
-    ).then(res => {
-      if (res.hasPermission) {
 
-      } else {
-        this.androidPermissions.requestPermission(this.androidPermissions.PERMISSION.READ_PHONE_STATE).then(res => {
-          // alert("Persmission Granted Please Restart App!");
-          this.helper.toast('请赋予访问本机设备号的权限！', 2000, 'bottom');
-        }).catch(error => {
-          // alert("Error! "+error);
-        });
-      }
-    }).catch(error => {
-      // alert("Error! "+error);
-    });
-
-  }
 
   // autoLogin() {
   //     this.auth.login(this.model.account, this.model.password, this.model.imeiCode).subscribe(res => {
@@ -89,7 +71,7 @@ export class LoginPage implements OnInit {
       return;
     }
     this.loading = true;
-    this.model.imeiCode = this.uid.IMEI;
+    // this.model.imeiCode = this.uid.IMEI;
     this.auth.login(this.model.account, this.model.password, this.model.imeiCode).subscribe(res => {
       if (res.isSuccess) {
         localStorage.setItem("id", res.data[0].id);
