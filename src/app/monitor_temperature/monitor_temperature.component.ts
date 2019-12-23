@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute,Router } from '@angular/router';
 import { Utils } from '../providers/Utils';
 import { NativeService } from '../providers/NativeService';
 import { Helper } from '../providers/Helper';
@@ -37,6 +37,7 @@ export class MonitorTemperaturePage implements OnInit {
         public helper: Helper,
         public service: MonitorService,
         public route: ActivatedRoute,
+        public router: Router,
         public nav: NavController
         ) {
 
@@ -367,6 +368,10 @@ export class MonitorTemperaturePage implements OnInit {
         // this.temperatureChart.setOption(this.chartOption);
     }
     viewList() {
-        this.nav.back();
+        // this.nav.back();
+        this.router.navigate(['/home/monitor'], {
+            queryParams: {
+            }
+        });
       }
 }
