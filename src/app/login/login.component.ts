@@ -28,13 +28,17 @@ export class LoginPage implements OnInit {
     public storage: Storage,
     private uid: Uid,
     private androidPermissions: AndroidPermissions) {
-  
+
   }
 
   ngOnInit() {
-    // setTimeout(() => {
-    //   this.model.imeiCode = this.uid.IMEI;
-    // }, 1000);
+    setTimeout(() => {
+      this.model.imeiCode = this.uid.IMEI;
+
+      if (!this.model.imeiCode) {
+        this.helper.toast('请赋予访问本机设备号的权限！', 2000, 'bottom');
+      }
+    }, 1000);
 
   }
 
@@ -71,7 +75,7 @@ export class LoginPage implements OnInit {
       return;
     }
     this.loading = true;
-    // this.model.imeiCode = this.uid.IMEI;
+    this.model.imeiCode = this.uid.IMEI;
     this.auth.login(this.model.account, this.model.password, this.model.imeiCode).subscribe(res => {
       if (res.isSuccess) {
         localStorage.setItem("id", res.data[0].id);
