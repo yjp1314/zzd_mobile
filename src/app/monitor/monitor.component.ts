@@ -17,14 +17,21 @@ import { GlobalData } from '../providers/GlobalData';
 
 export class MonitorPage implements OnInit {
 
+    equips = "";
     constructor(
         public nav: NavController, 
         public router: Router) {
-
+            this.equips = localStorage.getItem("equips").toLowerCase();
     }
+
     ngOnInit() {
-
     }
+
+    checkEquip(equipName){
+        // console.log(this.equips,equipName.toLowerCase(),this.equips.indexOf(equipName.toLowerCase()));
+        return (this.equips.indexOf(equipName.toLowerCase()) >= 0)
+    }
+
     viewTemperature(stationName,stationcode)
     {
         // this.nav.navigateForward(['/home/monitor/temperature'], {
