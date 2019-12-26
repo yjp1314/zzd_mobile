@@ -83,6 +83,7 @@ export class LoginPage implements OnInit {
         localStorage.setItem("password", this.model.password);
         localStorage.setItem("userName", res.data[0].userName);
         localStorage.setItem("companyid", res.data[0].companyId);
+        localStorage.setItem("equips", res.data[0].equipments);
         localStorage.setItem("imeiCode", res.data[0].imeiCode);
         this.loading = false;
         this.router.navigate(['/home/main']);

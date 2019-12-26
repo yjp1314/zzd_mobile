@@ -33,7 +33,7 @@ export class MinePage implements OnInit {
     }
 
     ngOnInit() {
-       
+
     }
 
     changePassword() {
@@ -50,12 +50,13 @@ export class MinePage implements OnInit {
             },
             {
                 text: '退出', handler: () => {
-                    localStorage.removeItem("id"); 
+                    localStorage.removeItem("id");
                     localStorage.removeItem("account");
                     localStorage.removeItem("password");
                     localStorage.removeItem("userName");
                     localStorage.removeItem("companyid");
                     localStorage.removeItem("imeiCode");
+                    localStorage.removeItem("equips");
                     this.router.navigate(['login']);
                 }
             }]
