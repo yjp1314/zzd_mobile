@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { ActivatedRoute,Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Utils } from '../providers/Utils';
 import { NativeService } from '../providers/NativeService';
 import { Helper } from '../providers/Helper';
@@ -39,22 +39,25 @@ export class MonitorTemperaturePage implements OnInit {
         public route: ActivatedRoute,
         public router: Router,
         public nav: NavController
-        ) {
+    ) {
 
     }
     ngOnInit() {
         this.route.queryParams.subscribe((data) => {
             console.log("Params:", data);
+            // console.log("11112222233333444445555566666");
             this.station_info.station_name = data.stationName;
             this.station_info.station_code = data.stationCode;
-        });
-        let that = this;
-        that.getSeaTemperatureData();
-        this.getTemperatureData();
-        this.interval = setInterval(function () {
-            console.log("TEST TIME:", new Date());
+
+            let that = this;
+            // console.log("asasdfasdfasdfasdfasdf");
             that.getSeaTemperatureData();
-        }, 1000 * 60 * 5);//
+            this.getTemperatureData();
+            this.interval = setInterval(function () {
+                console.log("TEST TIME:", new Date());
+                that.getSeaTemperatureData();
+            }, 1000 * 60 * 5);//
+        });
     }
 
     ngOnDestroy() {
@@ -72,7 +75,7 @@ export class MonitorTemperaturePage implements OnInit {
         let now = new Date();
         let today = now.getFullYear() + "-" + (now.getMonth() + 1) + "-" + now.getDate();
         this.service.getSeaTemperature(this.station_info.station_code, today).subscribe(res => {
-            console.log(res);
+            // console.log(res);
             if (res.isSuccess) {
                 this.seaTemperature = res.data;
                 let tc = new Date(this.seaTemperature[this.seaTemperature.length - 1].time);
@@ -253,11 +256,11 @@ export class MonitorTemperaturePage implements OnInit {
         let tempSort9 = seaTemparature9.slice(0);
         let tempSort12 = seaTemparature12.slice(0);
         let tempSort20 = seaTemparature20.slice(0);
-        tempSort3 = tempSort3.sort((n1, n2) => n1 - n2); console.log("tempSort3:", tempSort3,seaTemparature3);
-        tempSort6 = tempSort6.sort((n1, n2) => n1 - n2); console.log("tempSort6:", tempSort6,seaTemparature6);
-        tempSort9 = tempSort9.sort((n1, n2) => n1 - n2); console.log("tempSort9:", tempSort9,seaTemparature9);
-        tempSort12 = tempSort12.sort((n1, n2) => n1 - n2); console.log("tempSort12:", tempSort12,seaTemparature12);
-        tempSort20 = tempSort20.sort((n1, n2) => n1 - n2); console.log("tempSort20:", tempSort20,seaTemparature20);
+        tempSort3 = tempSort3.sort((n1, n2) => n1 - n2); //console.log("tempSort3:", tempSort3, seaTemparature3);
+        tempSort6 = tempSort6.sort((n1, n2) => n1 - n2); //console.log("tempSort6:", tempSort6, seaTemparature6);
+        tempSort9 = tempSort9.sort((n1, n2) => n1 - n2); //console.log("tempSort9:", tempSort9, seaTemparature9);
+        tempSort12 = tempSort12.sort((n1, n2) => n1 - n2); //console.log("tempSort12:", tempSort12, seaTemparature12);
+        tempSort20 = tempSort20.sort((n1, n2) => n1 - n2); //console.log("tempSort20:", tempSort20, seaTemparature20);
 
         let tempMin: number[] = [];// = [tempSort3[0] / 1.0, tempSort6[0] / 1.0, tempSort9[0] / 1.0, tempSort12[0] / 1.0, tempSort20[0] / 1.0]; console.log("tempMin:", tempMin);
         let tempMax: number[] = [];// = [tempSort3[tempSort3.length - 1] / 1.0, tempSort6[tempSort6.length - 1] / 1.0, tempSort9[tempSort9.length - 1] / 1.0, tempSort12[tempSort12.length - 1] / 1.0, tempSort20[tempSort20.length - 1] / 1.0];
@@ -272,8 +275,8 @@ export class MonitorTemperaturePage implements OnInit {
         if ((tempSort9[tempSort9.length - 1])) tempMax.push(tempSort9[tempSort9.length - 1]);
         if ((tempSort12[tempSort12.length - 1])) tempMax.push(tempSort12[tempSort12.length - 1]);
         if ((tempSort20[tempSort20.length - 1])) tempMax.push(tempSort20[tempSort20.length - 1]);
-        let tempMinSort = tempMin.sort((n1, n2) => n1 - n2); console.log("tempMinSort:", tempMinSort, tempMinSort[0]);
-        let tempMaxSort = tempMax.sort((n1, n2) => n1 - n2); console.log("tempMaxSort:", tempMaxSort, tempMaxSort[tempMaxSort.length - 1]);
+        let tempMinSort = tempMin.sort((n1, n2) => n1 - n2); //console.log("tempMinSort:", tempMinSort, tempMinSort[0]);
+        let tempMaxSort = tempMax.sort((n1, n2) => n1 - n2); //console.log("tempMaxSort:", tempMaxSort, tempMaxSort[tempMaxSort.length - 1]);
 
         // let tempTime = (new Date()).getTime();
         // let tempCount = 0;
@@ -286,8 +289,8 @@ export class MonitorTemperaturePage implements OnInit {
         //     tempCount++;
         // }
         // );
-        console.log("seaTemparature3:", seaTemparature3);
-        console.log("seaTemparature20:", seaTemparature20);
+        // console.log("seaTemparature3:", seaTemparature3);
+        // console.log("seaTemparature20:", seaTemparature20);
         // this.temperatureChart = this.ec.init(document.getElementById('temperatureChart'))
         this.chartSeaTemperatureOption = {
             title: {
@@ -373,5 +376,5 @@ export class MonitorTemperaturePage implements OnInit {
             queryParams: {
             }
         });
-      }
+    }
 }
