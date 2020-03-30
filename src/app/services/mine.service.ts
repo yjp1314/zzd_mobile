@@ -16,4 +16,8 @@ export class MineService {
     public changePassword(params) {
         return this.http.post('', params);
     }
+
+    public getUnusualData(params) {
+        return this.http.post('SeaTemperature/GetUnusualData', params)
+    }
 }

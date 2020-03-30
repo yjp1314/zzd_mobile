@@ -1,0 +1,23 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-title style="background: linear-gradient(to right, #1f96ff , #00569F);">
+            <span style="color: white">异常信息汇总</span>
+        </ion-title>
+        <ion-buttons style="float:left;">
+            <button ion-button small icon-only clear (click)="viewList()" style="background-color:rgba(0,0,0,0)">
+                <span style="color: white; font-size: 12px;font-weight: bolder;">返回</span>
+            </button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+<ion-content class="limiter">
+    当前日期：{{currentDate}}
+    <ion-list no-margin>
+        <ion-item *ngFor="let item of list" style="padding:2px">
+            <ion-label class="itemlist">
+                <ion-icon name="cloud" color="red" style="font-size: 16px;margin-right: 10px;"></ion-icon>
+                设备编号：{{item.name}} 在{{item.layer}}层 数据存在异常。
+            </ion-label>
+        </ion-item>
+    </ion-list>
+</ion-content>

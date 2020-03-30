@@ -32,37 +32,54 @@ export class LoginPage implements OnInit {
   }
 
   ngOnInit() {
-    setTimeout(() => {
-      this.model.imeiCode = this.uid.IMEI;
+    // setTimeout(() => {
+    //   this.model.imeiCode = this.uid.IMEI;
+    //   if (!this.model.imeiCode) {
+    //     this.helper.toast('请赋予访问本机设备号的权限！', 2000, 'bottom');
+    //   }
 
-      if (!this.model.imeiCode) {
-        this.helper.toast('请赋予访问本机设备号的权限！', 2000, 'bottom');
+    // }, 1000);
+    setTimeout(() => {
+      if (localStorage.getItem('imeiCode') && localStorage.getItem('account') && localStorage.getItem('password')) {
+        this.model.imeiCode = localStorage.getItem('imeiCode');
+        this.model.account = localStorage.getItem('account');
+        this.model.password = localStorage.getItem('password');
+        this.helper.toast('自动登录中！', 1000, 'bottom');
+        this.autoLogin(localStorage.getItem('imeiCode'), localStorage.getItem('account'), localStorage.getItem('password'));
+      }
+      else {
+        this.model.imeiCode = this.uid.IMEI;
+        if (!this.model.imeiCode) {
+          this.helper.toast('请赋予访问本机设备号的权限或输入IMEI码！', 2000, 'bottom');
+        }
       }
     }, 1000);
+
 
   }
 
 
-  // autoLogin() {
-  //     this.auth.login(this.model.account, this.model.password, this.model.imeiCode).subscribe(res => {
-  //         console.log(res.isSuccess)
-  //         if (res.isSuccess) {
-  //             this.storage.set('loginmsg', { 'account': this.model.account, 'password': this.model.password, 'imeiCode': this.model.imeiCode });
-  //             this.loading = false;
-  //             setTimeout(() => {
-  //                 this.nav.navigateRoot('/home/main');
-  //             }, 1000);
-  //         } else {
-  //             this.loading = false;
-  //             this.helper.toast('手机号或密码错误,请重试！', 2000, 'bottom');
-  //             return;
-  //         }
-  //     }, () => {
-  //         this.loading = false;
-  //         this.helper.toast('系统错误,请联系管理员！', 2000, 'bottom');
-  //         return;
-  //     });
-  // }
+  autoLogin(code, account, password) {
+    this.auth.login(account, password, code).subscribe(res => {
+      console.log(res.isSuccess)
+      if (res.isSuccess) {
+        this.savaLoginData(res);
+        this.loading = false;
+        setTimeout(() => {
+          this.router.navigate(['/home/main']);
+        }, 1000);
+      } else {
+        this.loading = false;
+        this.helper.toast(res.errorMessage, 2000, 'bottom');
+        return;
+      }
+    }, () => {
+      this.loading = false;
+      this.helper.toast('系统错误,请联系管理员！', 2000, 'bottom');
+      return;
+    });
+  }
+
   formSubmit() {
     // alert(this.uid.IMEI);
     // return;
@@ -75,16 +92,9 @@ export class LoginPage implements OnInit {
       return;
     }
     this.loading = true;
-    this.model.imeiCode = this.uid.IMEI;
     this.auth.login(this.model.account, this.model.password, this.model.imeiCode).subscribe(res => {
       if (res.isSuccess) {
-        localStorage.setItem("id", res.data[0].id);
-        localStorage.setItem("account", this.model.account);
-        localStorage.setItem("password", this.model.password);
-        localStorage.setItem("userName", res.data[0].userName);
-        localStorage.setItem("companyid", res.data[0].companyId);
-        localStorage.setItem("equips", res.data[0].equipments);
-        localStorage.setItem("imeiCode", res.data[0].imeiCode);
+        this.savaLoginData(res);
         this.loading = false;
         this.router.navigate(['/home/main']);
       } else {
@@ -97,5 +107,14 @@ export class LoginPage implements OnInit {
       this.helper.toast('系统错误,请联系管理员！', 2000, 'bottom');
       return;
     });
+  }
+  savaLoginData(res) {
+    localStorage.setItem("id", res.data[0].id);
+    localStorage.setItem("account", this.model.account);
+    localStorage.setItem("password", this.model.password);
+    localStorage.setItem("userName", res.data[0].userName);
+    localStorage.setItem("companyid", res.data[0].companyId);
+    localStorage.setItem("equips", res.data[0].equipments);
+    localStorage.setItem("imeiCode", res.data[0].imeiCode);
   }
 }
