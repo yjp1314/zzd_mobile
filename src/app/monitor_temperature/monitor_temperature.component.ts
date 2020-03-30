@@ -124,9 +124,9 @@ export class MonitorTemperaturePage implements OnInit {
 	}
 	GetcDateString() {
 		var tmp = "";
-		tmp += this.tgString.charAt((this.cYear - 4) % 10);
-		tmp += this.dzString.charAt((this.cYear - 4) % 12);
-		tmp += "年 ";
+		// tmp += this.tgString.charAt((this.cYear - 4) % 10);
+		// tmp += this.dzString.charAt((this.cYear - 4) % 12);
+		// tmp += "年 ";
 		if (this.cMonth < 1) {
 			tmp += "(闰)";
 			tmp += this.monString.charAt( - this.cMonth - 1);
