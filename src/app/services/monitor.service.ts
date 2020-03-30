@@ -22,4 +22,11 @@ export class MonitorService {
             'queryDateTime': date
         });
     }
+    public getTides(stationCode:any, dateFrom:any,dateTo:any){
+        return this.http.post('tide/GetTides', {
+            'stationCode': stationCode,
+            'publicDateFrom': dateFrom,
+            'publicDateTo': dateTo
+        });
+    }
 }

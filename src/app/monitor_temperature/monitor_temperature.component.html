@@ -80,6 +80,82 @@
       <div class="panel-chart" echarts [options]="chartSeaTemperatureOption"></div>
     </div>
 
+    <div class="aui-table">
+      <h5 style="text-align: center;"><span style="font-weight: bolder; margin-left: 5%;">潮汐数据</span>
+      </h5>
+      <div class="aui-text-title">
+        <p><span>公历：{{publicDate}}</span> &nbsp;
+          &nbsp;<span>阴历：{{moonDate}}</span></p>
+      </div>
+      <ul class="table-nav">
+        <li class="table-nav-item-short">
+          <span>潮时1</span>
+        </li>
+        <li class="table-nav-item-short">
+          <span>潮高1</span>
+        </li>
+        <li class="table-nav-item-short">
+          <span>潮时2</span>
+        </li>
+        <li class="table-nav-item-short">
+          <span>潮高2</span>
+        </li>
+        <li class="table-nav-item-short">
+          <span>潮时3</span>
+        </li>
+        <li class="table-nav-item-short">
+          <span>潮高3</span>
+        </li>
+        <li class="table-nav-item-short">
+          <span>潮时4</span>
+        </li>
+        <li class="table-nav-item-short">
+          <span>潮高4</span>
+        </li>
+      </ul>
+      <ul class="table-item" *ngFor="let item of seaTides">
+        <li class="table-info-item-short">
+          <span>
+            {{item.floodTime1}}
+          </span>
+        </li>
+        <li class="table-info-item-short">
+          <span>
+            {{item.floodHigh1}}
+          </span>
+        </li>
+        <li class="table-info-item-short">
+          <span>
+            {{item.floodTime2}}
+          </span>
+        </li>
+        <li class="table-info-item-short">
+          <span>
+            {{item.floodHigh2}}
+          </span>
+        </li>
+        <li class="table-info-item-short">
+          <span>
+            {{item.floodTime3}}
+          </span>
+        </li>
+        <li class="table-info-item-short">
+          <span>
+            {{item.floodHigh3}}
+          </span>
+        </li>
+        <li class="table-info-item-short">
+          <span>
+            {{item.floodTime4}}
+          </span>
+        </li>
+        <li class="table-info-item-short">
+          <span>
+            {{item.floodHigh4}}
+          </span>
+        </li>
+      </ul>
+    </div>
     <div style="margin-top: 15px;;">
       <div>
         <!-- <div style="color: darkorange; text-align: center; ">以下数据尚无法获取，此图为模拟数据</div> -->
