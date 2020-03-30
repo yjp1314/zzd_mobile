@@ -6,6 +6,8 @@ import { FormsModule } from '@angular/forms';
 import { MinePage } from './mine.component';
 import { ModifyPasswordPage } from './modify-password/modify-password.component';
 import { MineRoutingModule } from './mine-routing.module';
+import { UnusualComponent } from './unusual/unusual.component';
+
 @NgModule({
   imports: [
     IonicModule,
@@ -14,6 +16,6 @@ import { MineRoutingModule } from './mine-routing.module';
     MineRoutingModule
     // RouterModule.forChild([{ path: '', component: MinePage }]), NgxEchartsModule
   ],
-  declarations: [MinePage, ModifyPasswordPage]
+  declarations: [MinePage, ModifyPasswordPage, UnusualComponent]
 })
 export class MinePageModule { }
