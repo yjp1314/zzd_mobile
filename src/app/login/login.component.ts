@@ -32,13 +32,7 @@ export class LoginPage implements OnInit {
   }
 
   ngOnInit() {
-    // setTimeout(() => {
-    //   this.model.imeiCode = this.uid.IMEI;
-    //   if (!this.model.imeiCode) {
-    //     this.helper.toast('请赋予访问本机设备号的权限！', 2000, 'bottom');
-    //   }
-
-    // }, 1000);
+ 
     setTimeout(() => {
       if (localStorage.getItem('imeiCode') && localStorage.getItem('account') && localStorage.getItem('password')) {
         this.model.imeiCode = localStorage.getItem('imeiCode');
@@ -81,6 +75,7 @@ export class LoginPage implements OnInit {
   }
 
   formSubmit() {
+
     // alert(this.uid.IMEI);
     // return;
     if (this.model.account.length === 0) {

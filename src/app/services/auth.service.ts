@@ -22,6 +22,11 @@ export class AuthService {
             'imeiCode':imeiCode
         });
     }
+
+    test()
+    {
+        return this.http.post('getUserRole',{id:3});
+    }
     // 获取token
     // getToken(username, password) {
     //     return this.http.post('/v1/login', {
