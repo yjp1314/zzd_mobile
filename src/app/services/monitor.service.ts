@@ -29,4 +29,13 @@ export class MonitorService {
             'publicDateTo': dateTo
         });
     }
+    public getTemperatureByToday(){
+        return this.http.post('vaisalaAWS/GetVaisalaAWSTaByToday', {});
+    }
+    public getTemperatureByMonth(){
+        return this.http.post('vaisalaAWS/GetVaisalaAWSTaByMonth', {});
+    }
+    public getTemperatureShelfByToday(){
+        return this.http.post('vaisalaAWS/GetVaisalaAWSTaShelfByToday', {});
+    }
 }

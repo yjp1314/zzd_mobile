@@ -160,8 +160,8 @@
       <div>
         <!-- <div style="color: darkorange; text-align: center; ">以下数据尚无法获取，此图为模拟数据</div> -->
         <ul class="temper">
-          <li>当前气温：29.8°C 当前最高气温：29.8°C</li>
-          <li>历史平均气温：28.8°C 当前最低气温：27.6°C</li>
+          <li>当前气温：{{temperatureShelf.currentTa}}°C 当前最高气温：{{temperatureShelf.maxTa}}°C</li>
+          <li>当前平均气温：{{temperatureShelf.minTa}}°C 当前最低气温：{{temperatureShelf.averageTa}}°C</li>
         </ul>
       </div>
       <div class="panel-chart" echarts [options]="chartTemperatureOption"></div>
