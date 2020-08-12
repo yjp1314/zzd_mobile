@@ -38,4 +38,7 @@ export class MonitorService {
     public getTemperatureShelfByToday(){
         return this.http.post('vaisalaAWS/GetVaisalaAWSTaShelfByToday', {});
     }
+    public getCurrentInfo(stationCode:any){
+        return this.http.post('current/GetCurrentInfo', {station_name:stationCode});
+    }
 }

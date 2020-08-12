@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  appServerUrl: 'http://218.24.128.75:3356/api/services/app/',
+  //appServerUrl: 'http://218.24.128.75:3356/api/services/app/',
+  appServerUrl: 'http://localhost:6234/api/services/app/',
   requestTimeout: 15000
 };
 

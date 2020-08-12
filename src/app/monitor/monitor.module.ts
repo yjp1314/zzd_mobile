@@ -26,6 +26,13 @@ const routes: Routes = [
       data: {
         title: '海水温度'
       }
+    },
+    {
+      path: 'current',
+      component: MonitorCurrentPage,
+      data: {
+        title: '流向流速'
+      }
     }
     ]
   }
