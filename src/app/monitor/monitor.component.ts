@@ -32,6 +32,14 @@ export class MonitorPage implements OnInit {
         return (this.equips.indexOf(equipName.toLowerCase()) >= 0)
     }
 
+    viewAutoSiteData(stationName, stationcode) {
+        this.router.navigate(['/home/monitor/autosite'], {
+            queryParams: {
+                stationName: stationName,
+                stationCode: stationcode
+            }
+        });
+    }
     viewFlowRate(stationName, stationcode) {
         this.router.navigate(['/home/monitor/current'], {
             queryParams: {

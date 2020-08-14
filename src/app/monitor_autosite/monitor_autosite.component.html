@@ -1,0 +1,146 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title style="background: linear-gradient(to right, #66cdff , #1f96ff);">
+      <span style="color: white">数据监测</span>
+    </ion-title>
+    <ion-buttons style="float:left;">
+      <button ion-button small icon-only clear (click)="viewList()" style="background-color:rgba(0,0,0,0)">
+        <span style="color: white; font-size: 12px;font-weight: bolder;">返回</span>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="tab-panel">
+    <div class="tab-panel-item tab-active">
+      <div class="aui-text-title">
+        <h2><span>{{station_info.station_name}}</span></h2>
+      </div>
+    </div>
+    <div>
+      <div class="aui-table">
+        <h5 style="text-align: center;"><span style="font-weight: bolder; margin-left: 5%;">自动站数据</span></h5>
+        <ul>
+          <li class="table-nav table-nav-item">
+            <span>时间</span>
+          </li>
+          <li class="table-item table-info-item">
+            <span>
+              {{autositeData.obstime}}
+            </span>
+          </li>
+        </ul>
+        <ul>
+          <li class="table-nav table-nav-item">
+            <span>风向</span>
+          </li>
+          <li class="table-item table-info-item">
+            <span>
+              {{autositeData.dm}}&nbsp;°
+            </span>
+          </li>
+        </ul>
+        <ul>
+          <li class="table-nav table-nav-item">
+            <span>风速</span>
+          </li>
+          <li class="table-item table-info-item">
+            <span>
+              {{autositeData.sm}}&nbsp;m/s
+            </span>
+          </li>
+        </ul>
+        <ul>
+          <li class="table-nav table-nav-item">
+            <span>气温</span>
+          </li>
+          <li class="table-item table-info-item">
+            <span>
+              {{autositeData.ta}}&nbsp;°C
+            </span>
+          </li>
+        </ul>
+        <ul>
+          <li class="table-nav table-nav-item">
+            <span>湿度</span>
+          </li>
+          <li class="table-item table-info-item">
+            <span>
+              {{autositeData.ua}}&nbsp;%
+            </span>
+          </li>
+        </ul>
+        <ul>
+          <li class="table-nav table-nav-item">
+            <span>气压</span>
+          </li>
+          <li class="table-item table-info-item">
+            <span>
+              {{autositeData.pa}}&nbsp;hpa
+            </span>
+          </li>
+        </ul>
+
+      </div>
+    </div>
+    <!-- <div>
+            <div class="aui-table">
+                <h5 style="text-align: center;"><span style="font-weight: bolder; margin-left: 5%;">自动站数据</span></h5>
+                <ul class="table-nav">
+                    <li class="table-nav-item" style="width: 20%;">
+                      <span>时间</span>
+                    </li>
+                  <li class="table-nav-item">
+                    <span>风向</span>
+                  </li>
+                  <li class="table-nav-item">
+                    <span>风速</span>
+                  </li>
+                  <li class="table-nav-item">
+                    <span>气温</span>
+                  </li>
+                  <li class="table-nav-item">
+                    <span>湿度</span>
+                  </li>
+                  <li class="table-nav-item">
+                    <span>气压</span>
+                  </li>
+                </ul>
+                <ul class="table-item" *ngFor="let item of autositeData">
+                    <li class="table-info-item" style="width: 20%; background-color: #f4faff; border-bottom: 1px solid #d9d9d9;">
+                      <span>
+                        {{item.obstime}}
+                      </span>
+                    </li>
+                  <li class="table-info-item">
+                    <span>
+                      {{item.dm}}°
+                    </span>
+                  </li>
+                  <li class="table-info-item">
+                    <span>
+                      {{item.sm}}m/s
+                    </span>
+                  </li>
+                  <li class="table-info-item">
+                    <span>
+                      {{item.ta}}°C
+                    </span>
+                  </li>
+                  <li class="table-info-item">
+                    <span>
+                      {{item.ua}}%
+                    </span>
+                  </li>
+                  <li class="table-info-item">
+                    <span>
+                      {{item.pa}}hpa
+                    </span>
+                  </li>
+                </ul>
+              </div>
+        </div> -->
+
+  </div>
+</ion-content>

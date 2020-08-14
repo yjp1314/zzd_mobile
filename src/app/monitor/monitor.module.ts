@@ -7,6 +7,7 @@ import { MonitorPage } from './monitor.component';
 import { MonitorTemperaturePage } from '../monitor_temperature/monitor_temperature.component';
 import { NgxEchartsModule } from 'ngx-echarts';
 import { MonitorCurrentPage } from '../monitor_current/monitor_current.component'
+import { MonitorautositePage } from '../monitor_autosite/monitor_autosite.component'
 const routes: Routes = [
   {
     path: '',
@@ -33,6 +34,13 @@ const routes: Routes = [
       data: {
         title: '流向流速'
       }
+    },
+    {
+      path: 'autosite',
+      component: MonitorautositePage,
+      data: {
+        title: '自动站'
+      }
     }
     ]
   }
@@ -44,6 +52,6 @@ const routes: Routes = [
     FormsModule,
     RouterModule.forChild(routes), NgxEchartsModule//[{ path: '', component: MonitorPage }]
   ],
-  declarations: [MonitorPage, MonitorTemperaturePage, MonitorCurrentPage]
+  declarations: [MonitorPage, MonitorTemperaturePage, MonitorCurrentPage,MonitorautositePage]
 })
 export class MonitorPageModule { }
