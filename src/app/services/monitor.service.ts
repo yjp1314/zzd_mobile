@@ -29,4 +29,23 @@ export class MonitorService {
             'publicDateTo': dateTo
         });
     }
+    public getTemperatureByToday(){
+        return this.http.post('vaisalaAWS/GetVaisalaAWSTaByToday', {});
+    }
+    public getTemperatureByMonth(){
+        return this.http.post('vaisalaAWS/GetVaisalaAWSTaByMonth', {});
+    }
+    public getTemperatureShelfByToday(){
+        return this.http.post('vaisalaAWS/GetVaisalaAWSTaShelfByToday', {});
+    }
+    public getCurrentInfo(stationCode:any){
+        return this.http.post('current/GetCurrentInfo', {station_name:stationCode});
+    }
+    
+    public getAutositeDataByToday(){
+        return this.http.post('autoSite/GetAutoSiteDataByToday', {});
+    }
+    public getLastAutosite(){
+        return this.http.post('autoSite/GetLastAutoSiteByToday', {});
+    }
 }

@@ -6,7 +6,7 @@ import { NativeService } from '../providers/NativeService';
 import { Helper } from '../providers/Helper';
 import { HttpService } from '../providers/HttpService';
 import { GlobalData } from '../providers/GlobalData';
- import { MonitorService } from '../services/monitor.service';
+import { MonitorService } from '../services/monitor.service';
 
 @Component({
     selector: 'app-monitor',
@@ -19,21 +19,37 @@ export class MonitorPage implements OnInit {
 
     equips = "";
     constructor(
-        public nav: NavController, 
+        public nav: NavController,
         public router: Router) {
-            this.equips = localStorage.getItem("equips").toLowerCase();
+        this.equips = localStorage.getItem("equips").toLowerCase();
     }
 
     ngOnInit() {
     }
 
-    checkEquip(equipName){
-        // console.log(this.equips,equipName.toLowerCase(),this.equips.indexOf(equipName.toLowerCase()));
+    checkEquip(equipName) {
+        console.log(this.equips, equipName.toLowerCase(), this.equips.indexOf(equipName.toLowerCase()));
         return (this.equips.indexOf(equipName.toLowerCase()) >= 0)
     }
 
-    viewTemperature(stationName,stationcode)
-    {
+    viewAutoSiteData(stationName, stationcode) {
+        this.router.navigate(['/home/monitor/autosite'], {
+            queryParams: {
+                stationName: stationName,
+                stationCode: stationcode
+            }
+        });
+    }
+    viewFlowRate(stationName, stationcode) {
+        this.router.navigate(['/home/monitor/current'], {
+            queryParams: {
+                stationName: stationName,
+                stationCode: stationcode
+            }
+        });
+    }
+
+    viewTemperature(stationName, stationcode) {
         // this.nav.navigateForward(['/home/monitor/temperature'], {
         //     queryParams: {
         //         stationName: stationName,
@@ -47,7 +63,7 @@ export class MonitorPage implements OnInit {
             }
         });
     }
-    viewCurrent(stationName,equipmentId){
+    viewCurrent(stationName, equipmentId) {
         // this.nav.navigateForward(['/home/monitor/current'], {
         //     queryParams: {
         //         stationName: stationName,

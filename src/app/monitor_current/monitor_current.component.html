@@ -1,55 +1,324 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title style="background: linear-gradient(to right, #66cdff , #1f96ff);">
-      <span style="color: white">数据监测</span>
-    </ion-title>
-  </ion-toolbar>
+    <ion-toolbar>
+        <ion-title style="background: linear-gradient(to right, #66cdff , #1f96ff);">
+            <span style="color: white">数据监测</span>
+        </ion-title>
+        <ion-buttons style="float:left;">
+            <button ion-button small icon-only clear (click)="viewList()" style="background-color:rgba(0,0,0,0)">
+                <span style="color: white; font-size: 12px;font-weight: bolder;">返回</span>
+            </button>
+        </ion-buttons>
+    </ion-toolbar>
 </ion-header>
 
 <ion-content>
 
-  <div class="tab-panel">
-    <div class="tab-panel-item tab-active">
-      <div class="aui-text-title">
-        <h2><span>{{station_info.station_name}}</span></h2>        
-      </div>
+    <div class="tab-panel">
+        <div class="tab-panel-item tab-active">
+            <div class="aui-text-title">
+                <h2><span>{{station_info.station_name}}</span></h2>
+            </div>
+        </div>
+        
+        <ion-segment class="tab-nav b-line"  (ionChange)="segmentChanged($event)" style="padding-top: 5px;" [(ngModel)]="currentDeep">
+            <ion-segment-button class="tab-nav-item tab-active" value="2">
+                <ion-label>02m</ion-label>
+            </ion-segment-button>
+            <ion-segment-button class="tab-nav-item" value="4" >
+                <ion-label>04m</ion-label>
+            </ion-segment-button>
+            <ion-segment-button class="tab-nav-item" value="6">
+                <ion-label>06m</ion-label>
+            </ion-segment-button>
+            <ion-segment-button class="tab-nav-item"  value="8">
+                <ion-label>08m</ion-label>
+            </ion-segment-button>
+            <ion-segment-button class="tab-nav-item" value="10">
+                <ion-label>10m</ion-label>
+            </ion-segment-button>
+        </ion-segment>
+        <ion-segment class="tab-nav b-line"  (ionChange)="segmentChanged($event)" style="padding-top: 5px;" [(ngModel)]="currentDeep">
+            <ion-segment-button class="tab-nav-item" value="12">
+                <ion-label>12m</ion-label>
+            </ion-segment-button>
+            <ion-segment-button class="tab-nav-item" value="14" >
+                <ion-label>14m</ion-label>
+            </ion-segment-button>
+            <ion-segment-button class="tab-nav-item" value="16">
+                <ion-label>16m</ion-label>
+            </ion-segment-button>
+            <ion-segment-button class="tab-nav-item"  value="18">
+                <ion-label>18m</ion-label>
+            </ion-segment-button>
+            <ion-segment-button class="tab-nav-item" value="20">
+                <ion-label>20m</ion-label>
+            </ion-segment-button>
+        </ion-segment>
+        <ion-segment class="tab-nav b-line"  (ionChange)="segmentChanged($event)" style="padding-top: 5px;" [(ngModel)]="currentDeep">
+            <ion-segment-button class="tab-nav-item" value="22">
+                <ion-label>22m</ion-label>
+            </ion-segment-button>
+            <ion-segment-button class="tab-nav-item" value="24" >
+                <ion-label>24m</ion-label>
+            </ion-segment-button>
+            <ion-segment-button class="tab-nav-item" value="26">
+                <ion-label>26m</ion-label>
+            </ion-segment-button>
+            <ion-segment-button class="tab-nav-item"  value="28">
+                <ion-label>28m</ion-label>
+            </ion-segment-button>
+            <ion-segment-button class="tab-nav-item" value="30">
+                <ion-label>30m</ion-label>
+            </ion-segment-button>
+        </ion-segment>
+        <ion-segment class="tab-nav b-line"  (ionChange)="segmentChanged($event)" style="padding-top: 5px;" [(ngModel)]="currentDeep">
+            <ion-segment-button class="tab-nav-item" value="32">
+                <ion-label>32m</ion-label>
+            </ion-segment-button>
+            <ion-segment-button class="tab-nav-item" value="34" >
+                <ion-label>34m</ion-label>
+            </ion-segment-button>
+            <ion-segment-button class="tab-nav-item" value="36">
+                <ion-label>36m</ion-label>
+            </ion-segment-button>
+            <ion-segment-button class="tab-nav-item"  value="38">
+                <ion-label>38m</ion-label>
+            </ion-segment-button>
+            <ion-segment-button class="tab-nav-item" value="40">
+                <ion-label>40m</ion-label>
+            </ion-segment-button>
+        </ion-segment>
+        <ion-segment class="tab-nav b-line"  (ionChange)="segmentChanged($event)" style="padding-top: 5px;" [(ngModel)]="currentDeep">
+            <ion-segment-button class="tab-nav-item" value="42">
+                <ion-label>42m</ion-label>
+            </ion-segment-button>
+            <ion-segment-button class="tab-nav-item" value="44" >
+                <ion-label>44m</ion-label>
+            </ion-segment-button>
+            <ion-segment-button class="tab-nav-item" value="46">
+                <ion-label>46m</ion-label>
+            </ion-segment-button>
+            <ion-segment-button class="tab-nav-item"  value="48">
+                <ion-label>48m</ion-label>
+            </ion-segment-button>
+            <ion-segment-button class="tab-nav-item" value="50">
+                <ion-label>50m</ion-label>
+            </ion-segment-button>
+        </ion-segment>
+        <ion-segment class="tab-nav b-line"  (ionChange)="segmentChanged($event)" style="padding-top: 5px;" [(ngModel)]="currentDeep">
+            <ion-segment-button class="tab-nav-item" value="52">
+                <ion-label>52m</ion-label>
+            </ion-segment-button>
+            <ion-segment-button class="tab-nav-item" value="54" >
+                <ion-label>54m</ion-label>
+            </ion-segment-button>
+            <ion-segment-button class="tab-nav-item" value="56">
+                <ion-label>56m</ion-label>
+            </ion-segment-button>
+            <ion-segment-button class="tab-nav-item"  value="58">
+                <ion-label>58m</ion-label>
+            </ion-segment-button>
+            <ion-segment-button class="tab-nav-item" value="60">
+                <ion-label>60m</ion-label>
+            </ion-segment-button>
+        </ion-segment>
+        <!-- <ion-segment class="tab-nav b-line" style="padding-top: 5px;" [(Module)]>
+            <ion-segment-button class="tab-nav-item" value="2" *ngIf="currentDeep != 2" (click)="switchDeep(2)">
+                <ion-label>02m</ion-label>
+            </ion-segment-button>
+            <ion-segment-button class="tab-nav-item tab-active" value="2" *ngIf="currentDeep == 2">
+                <ion-label>02m</ion-label>
+            </ion-segment-button>
+            <ion-segment-button class="tab-nav-item" value="4" *ngIf="currentDeep != '4'" (click)="switchDeep(4)">
+                <ion-label>04m</ion-label>
+            </ion-segment-button>
+            <ion-segment-button class="tab-nav-item tab-active" value="4" *ngIf="currentDeep == '4'">
+                <ion-label>04m</ion-label>
+            </ion-segment-button>
+            <ion-segment-button class="tab-nav-item" value="6" *ngIf="currentDeep != '6'" (click)="switchDeep(6)">
+                <ion-label>06m</ion-label>
+            </ion-segment-button>
+            <ion-segment-button class="tab-nav-item tab-active" value="6" *ngIf="currentDeep == '6'">
+                <ion-label>06m</ion-label>
+            </ion-segment-button>
+            <ion-segment-button class="tab-nav-item" *ngIf="currentDeep != '8'" (click)="switchDeep(8)">
+                <ion-label>08m</ion-label>
+            </ion-segment-button>
+            <ion-segment-button class="tab-nav-item tab-active" *ngIf="currentDeep == '8'">
+                <ion-label>08m</ion-label>
+            </ion-segment-button>
+            <ion-segment-button class="tab-nav-item" *ngIf="currentDeep != '10'" (click)="switchDeep(10)">
+                <ion-label>10m</ion-label>
+            </ion-segment-button>
+            <ion-segment-button class="tab-nav-item tab-active"  *ngIf="currentDeep == '10'">
+                <ion-label>10m</ion-label>
+            </ion-segment-button>
+        </ion-segment>
+        <ion-segment (ionChange)="segmentChanged($event)" class="tab-nav b-line" style="padding-top: 5px;">
+            <ion-segment-button class="tab-nav-item" value="12" *ngIf="currentDeep != '12'">
+                <ion-label>12m</ion-label>
+            </ion-segment-button>
+            <ion-segment-button class="tab-nav-item tab-active" value="12" *ngIf="currentDeep == '12'">
+                <ion-label>12m</ion-label>
+            </ion-segment-button>
+            <ion-segment-button class="tab-nav-item" value="14" *ngIf="currentDeep != '14'">
+                <ion-label>14m</ion-label>
+            </ion-segment-button>
+            <ion-segment-button class="tab-nav-item tab-active" value="14" *ngIf="currentDeep == '14'">
+                <ion-label>14m</ion-label>
+            </ion-segment-button>
+            <ion-segment-button class="tab-nav-item" value="16" *ngIf="currentDeep != '16'">
+                <ion-label>16m</ion-label>
+            </ion-segment-button>
+            <ion-segment-button class="tab-nav-item tab-active" value="16" *ngIf="currentDeep == '16'">
+                <ion-label>16m</ion-label>
+            </ion-segment-button>
+            <ion-segment-button class="tab-nav-item" value="18" *ngIf="currentDeep != '18'">
+                <ion-label>18m</ion-label>
+            </ion-segment-button>
+            <ion-segment-button class="tab-nav-item tab-active" value="18" *ngIf="currentDeep == '18'">
+                <ion-label>18m</ion-label>
+            </ion-segment-button>
+            <ion-segment-button class="tab-nav-item" value="20" *ngIf="currentDeep != '20'">
+                <ion-label>20m</ion-label>
+            </ion-segment-button>
+            <ion-segment-button class="tab-nav-item tab-active" value="20" *ngIf="currentDeep == '20'">
+                <ion-label>20m</ion-label>
+            </ion-segment-button>
+        </ion-segment>
+        <ion-segment (ionChange)="segmentChanged($event)" class="tab-nav b-line" style="padding-top: 5px;">
+            <ion-segment-button class="tab-nav-item" value="22" *ngIf="currentDeep != '22'">
+                <ion-label>22m</ion-label>
+            </ion-segment-button>
+            <ion-segment-button class="tab-nav-item tab-active" value="22" *ngIf="currentDeep == '22'">
+                <ion-label>22m</ion-label>
+            </ion-segment-button>
+            <ion-segment-button class="tab-nav-item" value="24" *ngIf="currentDeep != '24'">
+                <ion-label>24m</ion-label>
+            </ion-segment-button>
+            <ion-segment-button class="tab-nav-item tab-active" value="24" *ngIf="currentDeep == '24'">
+                <ion-label>24m</ion-label>
+            </ion-segment-button>
+            <ion-segment-button class="tab-nav-item" value="26" *ngIf="currentDeep != '26'">
+                <ion-label>26m</ion-label>
+            </ion-segment-button>
+            <ion-segment-button class="tab-nav-item tab-active" value="26" *ngIf="currentDeep == '26'">
+                <ion-label>26m</ion-label>
+            </ion-segment-button>
+            <ion-segment-button class="tab-nav-item" value="28" *ngIf="currentDeep != '28'">
+                <ion-label>28m</ion-label>
+            </ion-segment-button>
+            <ion-segment-button class="tab-nav-item tab-active" value="28" *ngIf="currentDeep == '28'">
+                <ion-label>28m</ion-label>
+            </ion-segment-button>
+            <ion-segment-button class="tab-nav-item" value="30" *ngIf="currentDeep != '30'">
+                <ion-label>30m</ion-label>
+            </ion-segment-button>
+            <ion-segment-button class="tab-nav-item tab-active" value="30" *ngIf="currentDeep == '30'">
+                <ion-label>30m</ion-label>
+            </ion-segment-button>
+        </ion-segment>
+        <ion-segment (ionChange)="segmentChanged($event)" class="tab-nav b-line" style="padding-top: 5px;">
+            <ion-segment-button class="tab-nav-item" value="32" *ngIf="currentDeep != '32'">
+                <ion-label>32m</ion-label>
+            </ion-segment-button>
+            <ion-segment-button class="tab-nav-item tab-active" value="32" *ngIf="currentDeep == '32'">
+                <ion-label>32m</ion-label>
+            </ion-segment-button>
+            <ion-segment-button class="tab-nav-item" value="34" *ngIf="currentDeep != '34'">
+                <ion-label>34m</ion-label>
+            </ion-segment-button>
+            <ion-segment-button class="tab-nav-item tab-active" value="34" *ngIf="currentDeep == '34'">
+                <ion-label>34m</ion-label>
+            </ion-segment-button>
+            <ion-segment-button class="tab-nav-item" value="36" *ngIf="currentDeep != '36'">
+                <ion-label>36m</ion-label>
+            </ion-segment-button>
+            <ion-segment-button class="tab-nav-item tab-active" value="36" *ngIf="currentDeep == '36'">
+                <ion-label>36m</ion-label>
+            </ion-segment-button>
+            <ion-segment-button class="tab-nav-item" value="38" *ngIf="currentDeep != '38'">
+                <ion-label>38m</ion-label>
+            </ion-segment-button>
+            <ion-segment-button class="tab-nav-item tab-active" value="38" *ngIf="currentDeep == '38'">
+                <ion-label>38m</ion-label>
+            </ion-segment-button>
+            <ion-segment-button class="tab-nav-item" value="40" *ngIf="currentDeep != '40'">
+                <ion-label>40m</ion-label>
+            </ion-segment-button>
+            <ion-segment-button class="tab-nav-item tab-active" value="40" *ngIf="currentDeep == '40'">
+                <ion-label>40m</ion-label>
+            </ion-segment-button>
+        </ion-segment>
+        <ion-segment (ionChange)="segmentChanged($event)" class="tab-nav b-line" style="padding-top: 5px;">
+            <ion-segment-button class="tab-nav-item" value="42" *ngIf="currentDeep != '42'">
+                <ion-label>42m</ion-label>
+            </ion-segment-button>
+            <ion-segment-button class="tab-nav-item tab-active" value="42" *ngIf="currentDeep == '42'">
+                <ion-label>42m</ion-label>
+            </ion-segment-button>
+            <ion-segment-button class="tab-nav-item" value="44" *ngIf="currentDeep != '44'">
+                <ion-label>44m</ion-label>
+            </ion-segment-button>
+            <ion-segment-button class="tab-nav-item tab-active" value="44" *ngIf="currentDeep == '44'">
+                <ion-label>44m</ion-label>
+            </ion-segment-button>
+            <ion-segment-button class="tab-nav-item" value="46" *ngIf="currentDeep != '46'">
+                <ion-label>46m</ion-label>
+            </ion-segment-button>
+            <ion-segment-button class="tab-nav-item tab-active" value="46" *ngIf="currentDeep == '46'">
+                <ion-label>46m</ion-label>
+            </ion-segment-button>
+            <ion-segment-button class="tab-nav-item" value="48" *ngIf="currentDeep != '48'">
+                <ion-label>48m</ion-label>
+            </ion-segment-button>
+            <ion-segment-button class="tab-nav-item tab-active" value="48" *ngIf="currentDeep == '48'">
+                <ion-label>48m</ion-label>
+            </ion-segment-button>
+            <ion-segment-button class="tab-nav-item" value="50" *ngIf="currentDeep != '50'">
+                <ion-label>50m</ion-label>
+            </ion-segment-button>
+            <ion-segment-button class="tab-nav-item tab-active" value="50" *ngIf="currentDeep == '50'">
+                <ion-label>50m</ion-label>
+            </ion-segment-button>
+        </ion-segment>
+        <ion-segment (ionChange)="segmentChanged($event)" class="tab-nav b-line" style="padding-top: 5px;">
+            <ion-segment-button class="tab-nav-item" value="52" *ngIf="currentDeep != '52'">
+                <ion-label>52m</ion-label>
+            </ion-segment-button>
+            <ion-segment-button class="tab-nav-item tab-active" value="52" *ngIf="currentDeep == '52'">
+                <ion-label>52m</ion-label>
+            </ion-segment-button>
+            <ion-segment-button class="tab-nav-item" value="55" *ngIf="currentDeep != '54'">
+                <ion-label>54m</ion-label>
+            </ion-segment-button>
+            <ion-segment-button class="tab-nav-item tab-active" value="54" *ngIf="currentDeep == '54'">
+                <ion-label>54m</ion-label>
+            </ion-segment-button>
+            <ion-segment-button class="tab-nav-item" value="56" *ngIf="currentDeep != '56'">
+                <ion-label>56m</ion-label>
+            </ion-segment-button>
+            <ion-segment-button class="tab-nav-item tab-active" value="56" *ngIf="currentDeep == '56'">
+                <ion-label>56m</ion-label>
+            </ion-segment-button>
+            <ion-segment-button class="tab-nav-item" value="58" *ngIf="currentDeep != '58'">
+                <ion-label>58m</ion-label>
+            </ion-segment-button>
+            <ion-segment-button class="tab-nav-item tab-active" value="58" *ngIf="currentDeep == '58'">
+                <ion-label>58m</ion-label>
+            </ion-segment-button>
+            <ion-segment-button class="tab-nav-item" value="50" *ngIf="currentDeep != '60'">
+                <ion-label>60m</ion-label>
+            </ion-segment-button>
+            <ion-segment-button class="tab-nav-item tab-active" value="50" *ngIf="currentDeep == '60'">
+                <ion-label>60m</ion-label>
+            </ion-segment-button>
+        </ion-segment> -->
+        <div>
+            <h4><span>流向：{{currentDirect}}</span></h4>
+            <p></p>
+            <div class="panel-chart" echarts [options]="chartSeaCurrentOption" id="currentChart"></div>
+        </div>
+
     </div>
-    <ion-segment (ionChange)="segmentChanged($event)" class="tab-nav b-line" style="padding-top: 5px;">
-        <ion-segment-button class="tab-nav-item" value="2" *ngIf="currentDeep != '2'">
-            <ion-label>2m</ion-label>
-        </ion-segment-button>
-        <ion-segment-button class="tab-nav-item tab-active" value="2" *ngIf="currentDeep == '2'">
-            <ion-label>2m</ion-label>
-        </ion-segment-button>
-        <ion-segment-button class="tab-nav-item" value="6" *ngIf="currentDeep != '6'">
-            <ion-label>6m</ion-label>
-        </ion-segment-button>
-        <ion-segment-button class="tab-nav-item tab-active" value="6" *ngIf="currentDeep == '6'">
-            <ion-label>6m</ion-label>
-        </ion-segment-button>
-        <ion-segment-button class="tab-nav-item" value="12" *ngIf="currentDeep != '12'">
-            <ion-label>12m</ion-label>
-        </ion-segment-button>
-        <ion-segment-button class="tab-nav-item tab-active" value="12" *ngIf="currentDeep == '12'">
-            <ion-label>12m</ion-label>
-        </ion-segment-button>
-        <ion-segment-button class="tab-nav-item" value="16" *ngIf="currentDeep != '16'">
-            <ion-label>16m</ion-label>
-        </ion-segment-button>
-        <ion-segment-button class="tab-nav-item tab-active" value="16" *ngIf="currentDeep == '16'">
-            <ion-label>16m</ion-label>
-        </ion-segment-button>
-        <ion-segment-button class="tab-nav-item" value="30" *ngIf="currentDeep != '30'">
-            <ion-label>30m</ion-label>
-        </ion-segment-button>
-        <ion-segment-button class="tab-nav-item tab-active" value="30" *ngIf="currentDeep == '30'">
-            <ion-label>30m</ion-label>
-        </ion-segment-button>
-    </ion-segment>
-    <div>
-        <span style="color: darkorange;">以下数据尚无法获取，此图为模拟数据</span>
-      <div class="panel-chart" echarts [options]="chartSeaCurrentOption" id="currentChart"></div>
-    </div>   
-    
-  </div>
 </ion-content>
