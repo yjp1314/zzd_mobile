@@ -220,12 +220,12 @@ export class MonitorCurrentPage implements OnInit {
                 {
                     name: '转速',
                     type: 'gauge',
-                    center: ['28%', '55%'],    // 默认全局居中
+                    center: ['22%', '55%'],    // 默认全局居中
                     radius: '35%',
                     min: 0,
-                    max: 10,
+                    max: 6,
                     endAngle: 45,
-                    splitNumber: 5,
+                    splitNumber: 3,
                     axisLine: {            // 坐标轴线
                         lineStyle: {       // 属性lineStyle控制线条样式
                             width: 8
@@ -374,37 +374,39 @@ export class MonitorCurrentPage implements OnInit {
     }
     getDirect(direct) {
         console.log("direct:", direct);
-        var tempDirect = "N";
+        var tempDirect = "北";
         if ((direct >= 348.76 && direct <= 360) || (direct >= 0 && direct <= 11.25))
-            tempDirect = "N";
+            tempDirect = "北";
         if (direct >= 11.26 && direct <= 33.75)
-            tempDirect = "NNE";
+            tempDirect = "北东北";
         if (direct >= 33.76 && direct <= 56.25)
-            tempDirect = "NE";
+            tempDirect = "东北";
         if (direct >= 56.26 && direct <= 78.75)
-            tempDirect = "ENE";
+            tempDirect = "东东北";
         if (direct >= 78.76 && direct <= 101.25)
-            tempDirect = "E";
+            tempDirect = "东";
         if (direct >= 101.26 && direct <= 123.75)
-            tempDirect = "ESE";
+            tempDirect = "东东南";
         if (direct >= 123.76 && direct <= 146.25)
-            tempDirect = "SE";
+            tempDirect = "东南";
         if (direct >= 146.26 && direct <= 168.75)
-            tempDirect = "SSE";
+            tempDirect = "南东南";
         if (direct >= 168.76 && direct <= 191.25)
-            tempDirect = "S";
+            tempDirect = "南";
         if (direct >= 191.26 && direct <= 213.75)
-            tempDirect = "SSW";
+            tempDirect = "南西南";
         if (direct >= 213.76 && direct <= 236.25)
-            tempDirect = "SW";
+            tempDirect = "西南";
         if (direct >= 236.26 && direct <= 258.75)
-            tempDirect = "WSW";
+            tempDirect = "西西南";
         if (direct >= 258.76 && direct <= 281.25)
-            tempDirect = "WNW";
+            tempDirect = "西";
+        if (direct >= 281.26 && direct <= 303.75  )
+            tempDirect = "西西北";
         if (direct >= 303.76 && direct <= 326.25)
-            tempDirect = "NW";
+            tempDirect = "西北";
         if (direct >= 326.26 && direct <= 348.75)
-            tempDirect = "NNW";
+            tempDirect = "北西北";
         console.log("tempDirect:", tempDirect);
         return tempDirect;
     }
