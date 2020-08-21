@@ -32,6 +32,7 @@ export class MonitorTemperaturePage implements OnInit {
     currentSeaTemperature = { time: "", t3: "", t6: "", t9: "", t12: "", t20: "" }
     temperatureDay = [];
     temperatureMonth = [];
+    temperatureShelf = {currentTa:0, maxTa:0, minTa:0, averageTa:0};
     interval: any;
     publicDate:any;
     moonDate:any;
@@ -65,8 +66,9 @@ export class MonitorTemperaturePage implements OnInit {
             let that = this;
             // console.log("asasdfasdfasdfasdfasdf");
             that.getSeaTemperatureData();
-            this.getTemperatureData();
+            this.getTemperatureDataByToday();
             this.getTideData();
+            this.getTemperatureShelf();
             this.interval = setInterval(function () {
                 console.log("TEST TIME:", new Date());
                 that.getSeaTemperatureData();
@@ -214,64 +216,125 @@ export class MonitorTemperaturePage implements OnInit {
 
         // this.generateSeaTemperatureChart();
     }
-    getTemperatureData() {
-        this.temperatureDay = [{ time: '00:00', t: 28 },
-        { time: '02:00', t: 28 },
-        { time: '04:00', t: 25.5 },
-        { time: '06:00', t: 21.8 },
-        { time: '08:00', t: 22.3 },
-        { time: '10:00', t: 20.4 },
-        { time: '12:00', t: 18.9 },
-        { time: '14:00', t: 20.1 },
-        { time: '16:00', t: 25.1 },
-        { time: '18:00', t: 28.2 },
-        { time: '20:00', t: 26.5 },
-        { time: '22:00', t: 25.4 }];
-        this.temperatureMonth = [{ date: '12-01', t: 28.1 },
-        { date: '12-02', t: 28 },
-        { date: '12-03', t: 20.9 },
-        { date: '12-04', t: 25.4 },
-        { date: '12-05', t: 26 },
-        { date: '12-06', t: 20.7 },
-        { date: '12-07', t: 25.1 },
-        { date: '12-08', t: 20.8 },
-        { date: '12-09', t: 20.5 },
-        { date: '12-10', t: 28.5 },
-        { date: '12-11', t: 28.2 },
-        { date: '12-12', t: 20.9 },
-        { date: '12-13', t: 25.5 },
-        { date: '12-14', t: 25.9 },
-        { date: '12-15', t: 28 },
-        { date: '12-16', t: 20.4 },
-        { date: '12-17', t: 25.3 },
-        { date: '12-18', t: 20.8 },
-        { date: '12-19', t: 20.7 },
-        { date: '12-20', t: 28 },
-        { date: '12-21', t: 26.4 },
-        { date: '12-22', t: 20.6 },
-        { date: '12-23', t: 25.8 },
-        { date: '12-24', t: 25.6 },
-        { date: '12-25', t: 28.2 },
-        { date: '12-26', t: 20.9 },
-        { date: '12-27', t: 25.4 },
-        { date: '12-28', t: 20.9 },
-        { date: '12-29', t: 20.7 },
-        { date: '12-30', t: 28.1 },
-        { date: '12-31', t: 28.0 }];
-        this.generateTemperatureChart()
+    getTemperatureShelf(){
+        
+        this.service.getTemperatureShelfByToday().subscribe(res => {
+            // console.log(res);
+            if (res.isSuccess) {
+                this.temperatureShelf = res.data;
+            }
+            else {
+                this.helper.toast('没有温度信息，请联系管理员！', 2000, 'bottom');
+                this.helper.hideLoading();
+                return;
+            }
+        }, () => {
+            this.helper.toast('温度信息获取错误，请联系管理员！', 2000, 'bottom');
+            this.helper.hideLoading();
+            return;
+        });
+    }
+    getTemperatureDataByMonth(){
+        
+        this.service.getTemperatureByMonth().subscribe(res => {
+            // console.log(res);
+            if (res.isSuccess) {
+                this.temperatureMonth = res.data;
+                this.generateTemperatureChart();
+            }
+            else {
+                this.helper.toast('没有当月温度信息，请联系管理员！', 2000, 'bottom');
+                this.helper.hideLoading();
+                return;
+            }
+        }, () => {
+            this.helper.toast('当月温度信息获取错误，请联系管理员！', 2000, 'bottom');
+            this.helper.hideLoading();
+            return;
+        });
+    }
+    getTemperatureDataByToday() {
+        this.service.getTemperatureByToday().subscribe(res => {
+            // console.log(res);
+            if (res.isSuccess) {
+                this.temperatureDay = res.data;
+                this.getTemperatureDataByMonth();
+            }
+            else {
+                this.helper.toast('没有当日温度信息，请联系管理员！', 2000, 'bottom');
+                this.helper.hideLoading();
+                return;
+            }
+        }, () => {
+            this.helper.toast('当日温度信息获取错误，请联系管理员！', 2000, 'bottom');
+            this.helper.hideLoading();
+            return;
+        });
+        // this.temperatureDay = [{ time: '00:00', t: 28 },
+        // { time: '02:00', t: 28 },
+        // { time: '04:00', t: 25.5 },
+        // { time: '06:00', t: 21.8 },
+        // { time: '08:00', t: 22.3 },
+        // { time: '10:00', t: 20.4 },
+        // { time: '12:00', t: 18.9 },
+        // { time: '14:00', t: 20.1 },
+        // { time: '16:00', t: 25.1 },
+        // { time: '18:00', t: 28.2 },
+        // { time: '20:00', t: 26.5 },
+        // { time: '22:00', t: 25.4 }];
+        // this.temperatureMonth = [{ date: '12-01', t: 28.1 },
+        // { date: '12-02', t: 28 },
+        // { date: '12-03', t: 20.9 },
+        // { date: '12-04', t: 25.4 },
+        // { date: '12-05', t: 26 },
+        // { date: '12-06', t: 20.7 },
+        // { date: '12-07', t: 25.1 },
+        // { date: '12-08', t: 20.8 },
+        // { date: '12-09', t: 20.5 },
+        // { date: '12-10', t: 28.5 },
+        // { date: '12-11', t: 28.2 },
+        // { date: '12-12', t: 20.9 },
+        // { date: '12-13', t: 25.5 },
+        // { date: '12-14', t: 25.9 },
+        // { date: '12-15', t: 28 },
+        // { date: '12-16', t: 20.4 },
+        // { date: '12-17', t: 25.3 },
+        // { date: '12-18', t: 20.8 },
+        // { date: '12-19', t: 20.7 },
+        // { date: '12-20', t: 28 },
+        // { date: '12-21', t: 26.4 },
+        // { date: '12-22', t: 20.6 },
+        // { date: '12-23', t: 25.8 },
+        // { date: '12-24', t: 25.6 },
+        // { date: '12-25', t: 28.2 },
+        // { date: '12-26', t: 20.9 },
+        // { date: '12-27', t: 25.4 },
+        // { date: '12-28', t: 20.9 },
+        // { date: '12-29', t: 20.7 },
+        // { date: '12-30', t: 28.1 },
+        // { date: '12-31', t: 28.0 }];
+        // this.generateTemperatureChart()
     }
     generateTemperatureChart() {
         let tempertatureDayTime = this.temperatureDay.map(function (item) {
-            return item.time;
+            let tc = new Date(item.obstime);
+            let hours = (tc.getHours() > 9) ? tc.getHours() : "0" + tc.getHours();
+            let minutes = (tc.getMinutes() > 9) ? tc.getMinutes() : "0" + tc.getMinutes();
+            return hours + ":" + minutes;
+            // return item.obstime;
         });
         let tempertatureDayValue = this.temperatureDay.map(function (item) {
-            return item.t;
+            return item.ta;
         });
         let tempertatureMonthDate = this.temperatureMonth.map(function (item) {
-            return item.date;
+            let tc = new Date(item.obstime);
+            let month = (tc.getMonth() > 8) ? (tc.getMonth() + 1) : "0" + (tc.getMonth() + 1);
+            let day = (tc.getDate() > 9) ? tc.getDate() : "0" + tc.getDate();
+            return month + "-" + day;
+            // return item.obstime;
         });
         let tempertatureMonthValue = this.temperatureMonth.map(function (item) {
-            return item.t;
+            return item.ta;
         });
         this.chartTemperatureOption = {
             // Make gradient line here
