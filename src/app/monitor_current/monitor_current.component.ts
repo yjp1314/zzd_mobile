@@ -152,7 +152,7 @@ export class MonitorCurrentPage implements OnInit {
                     max: 360,
                     splitNumber: 18,
                     radius: '60%',
-                    center: ['62%', '55%'],    // 默认全局居中
+                    center: ['62%', '30%'],    // 默认全局居中
                     axisLine: {            // 坐标轴线
                         lineStyle: {       // 属性lineStyle控制线条样式
                             width: 10
@@ -220,7 +220,7 @@ export class MonitorCurrentPage implements OnInit {
                 {
                     name: '转速',
                     type: 'gauge',
-                    center: ['22%', '55%'],    // 默认全局居中
+                    center: ['22%', '30%'],    // 默认全局居中
                     radius: '35%',
                     min: 0,
                     max: 6,
