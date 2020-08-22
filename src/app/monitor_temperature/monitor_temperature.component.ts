@@ -32,22 +32,22 @@ export class MonitorTemperaturePage implements OnInit {
     currentSeaTemperature = { time: "", t3: "", t6: "", t9: "", t12: "", t20: "" }
     temperatureDay = [];
     temperatureMonth = [];
-    temperatureShelf = {currentTa:0, maxTa:0, minTa:0, averageTa:0};
+    temperatureShelf = { currentTa: 0, maxTa: 0, minTa: 0, averageTa: 0 };
     interval: any;
-    publicDate:any;
-    moonDate:any;
+    publicDate: any;
+    moonDate: any;
     CalendarData = new Array(0xA4B, 0x5164B, 0x6A5, 0x6D4, 0x415B5, 0x2B6, 0x957, 0x2092F, 0x497, 0x60C96, 0xD4A, 0xEA5, 0x50DA9, 0x5AD, 0x2B6, 0x3126E, 0x92E, 0x7192D, 0xC95, 0xD4A, 0x61B4A, 0xB55, 0x56A, 0x4155B, 0x25D, 0x92D, 0x2192B, 0xA95, 0x71695, 0x6CA, 0xB55, 0x50AB5, 0x4DA, 0xA5B, 0x30A57, 0x52B, 0x8152A, 0xE95, 0x6AA, 0x615AA, 0xAB5, 0x4B6, 0x414AE, 0xA57, 0x526, 0x31D26, 0xD95, 0x70B55, 0x56A, 0x96D, 0x5095D, 0x4AD, 0xA4D, 0x41A4D, 0xD25, 0x81AA5, 0xB54, 0xB6A, 0x612DA, 0x95B, 0x49B, 0x41497, 0xA4B, 0xA164B, 0x6A5, 0x6D4, 0x615B4, 0xAB6, 0x957, 0x5092F, 0x497, 0x64B, 0x30D4A, 0xEA5, 0x80D65, 0x5AC, 0xAB6, 0x5126D, 0x92E, 0xC96, 0x41A95, 0xD4A, 0xDA5, 0x20B55, 0x56A, 0x7155B, 0x25D, 0x92D, 0x5192B, 0xA95, 0xB4A, 0x416AA, 0xAD5, 0x90AB5, 0x4BA, 0xA5B, 0x60A57, 0x52B, 0xA93, 0x40E95);
-    madd= [0,31,59,90,120,151,181,212,243,273,304,334];
-    
-    cYear:any; 
-    cMonth:any; 
-    cDay:any; 
+    madd = [0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334];
+
+    cYear: any;
+    cMonth: any;
+    cDay: any;
     TheDate: any;
-	tgString = "甲乙丙丁戊己庚辛壬癸";
+    tgString = "甲乙丙丁戊己庚辛壬癸";
     dzString = "子丑寅卯辰巳午未申酉戌亥";
-	monString = "正二三四五六七八九十冬腊";
-	numString = "一二三四五六七八九十";
-    
+    monString = "正二三四五六七八九十冬腊";
+    numString = "一二三四五六七八九十";
+
     constructor(
         public helper: Helper,
         public service: MonitorService,
@@ -59,16 +59,15 @@ export class MonitorTemperaturePage implements OnInit {
     ngOnInit() {
         this.route.queryParams.subscribe((data) => {
             console.log("Params:", data);
-            // console.log("11112222233333444445555566666");
             this.station_info.station_name = data.stationName;
             this.station_info.station_code = data.stationCode;
 
             let that = this;
-            // console.log("asasdfasdfasdfasdfasdf");
             that.getSeaTemperatureData();
             this.getTemperatureDataByToday();
             this.getTideData();
             this.getTemperatureShelf();
+            this.getlocation();
             this.interval = setInterval(function () {
                 console.log("TEST TIME:", new Date());
                 that.getSeaTemperatureData();
@@ -76,7 +75,7 @@ export class MonitorTemperaturePage implements OnInit {
         });
         let now = new Date();
         this.publicDate = now.getFullYear() + "-" + (now.getMonth() + 1) + "-" + now.getDate();
-        this.moonDate =  this.GetLunarDay(now.getFullYear(),(now.getMonth() + 1) , now.getDate());//"asdf";
+        this.moonDate = this.GetLunarDay(now.getFullYear(), (now.getMonth() + 1), now.getDate());//"asdf";
     }
 
     ngOnDestroy() {
@@ -90,68 +89,132 @@ export class MonitorTemperaturePage implements OnInit {
         clearInterval(this.interval);
     }
     GetBit(m, n) {
-		return (m >> n) & 1;
-	}
+        return (m >> n) & 1;
+    }
     e2c(solarYear, solarMonth, solarDay) {
-		let TheDate = new Date(solarYear, solarMonth, solarDay);
-		var total, m, n, k;
-		var isEnd = false;
-		var tmp = TheDate.getFullYear();
-		total = (tmp - 1921) * 365 + Math.floor((tmp - 1921) / 4) + this.madd[TheDate.getMonth()] + TheDate.getDate() - 38;
-		if (TheDate.getFullYear() % 4 == 0 && TheDate.getMonth() > 1) {
-			total++;
-		}
-		for (m = 0;; m++) {
-			k = (this.CalendarData[m] < 0xfff) ? 11 : 12;
-			for (n = k; n >= 0; n--) {
-				if (total <= 29 + this.GetBit(this.CalendarData[m], n)) {
-					isEnd = true;
-					break;
-				}
-				total = total - 29 - this.GetBit(this.CalendarData[m], n);
-			}
-			if (isEnd) break;
-		}
-		this.cYear = 1921 + m;
-		this.cMonth = k - n + 1;
-		this.cDay = total;
-		if (k == 12) {
-			if (this.cMonth == Math.floor(this.CalendarData[m] / 0x10000) + 1) {
-				this.cMonth = 1 - this.cMonth;
-			}
-			if (this.cMonth > Math.floor(this.CalendarData[m] / 0x10000) + 1) {
-				this.cMonth--;
-			}
-		}
-	}
-	GetcDateString() {
-		var tmp = "";
-		// tmp += this.tgString.charAt((this.cYear - 4) % 10);
-		// tmp += this.dzString.charAt((this.cYear - 4) % 12);
-		// tmp += "年 ";
-		if (this.cMonth < 1) {
-			tmp += "(闰)";
-			tmp += this.monString.charAt( - this.cMonth - 1);
-		} else {
-			tmp += this.monString.charAt(this.cMonth - 1);
-		}
-		tmp += "月";
-		tmp += (this.cDay < 11) ? "初": ((this.cDay < 20) ? "十": ((this.cDay < 30) ? "廿": "三十"));
-		if (this.cDay % 10 != 0 || this.cDay == 10) {
-			tmp += this.numString.charAt((this.cDay - 1) % 10);
-		}
-		return tmp;
-	}
+        let TheDate = new Date(solarYear, solarMonth, solarDay);
+        var total, m, n, k;
+        var isEnd = false;
+        var tmp = TheDate.getFullYear();
+        total = (tmp - 1921) * 365 + Math.floor((tmp - 1921) / 4) + this.madd[TheDate.getMonth()] + TheDate.getDate() - 38;
+        if (TheDate.getFullYear() % 4 == 0 && TheDate.getMonth() > 1) {
+            total++;
+        }
+        for (m = 0; ; m++) {
+            k = (this.CalendarData[m] < 0xfff) ? 11 : 12;
+            for (n = k; n >= 0; n--) {
+                if (total <= 29 + this.GetBit(this.CalendarData[m], n)) {
+                    isEnd = true;
+                    break;
+                }
+                total = total - 29 - this.GetBit(this.CalendarData[m], n);
+            }
+            if (isEnd) break;
+        }
+        this.cYear = 1921 + m;
+        this.cMonth = k - n + 1;
+        this.cDay = total;
+        if (k == 12) {
+            if (this.cMonth == Math.floor(this.CalendarData[m] / 0x10000) + 1) {
+                this.cMonth = 1 - this.cMonth;
+            }
+            if (this.cMonth > Math.floor(this.CalendarData[m] / 0x10000) + 1) {
+                this.cMonth--;
+            }
+        }
+    }
+    GetcDateString() {
+        var tmp = "";
+        // tmp += this.tgString.charAt((this.cYear - 4) % 10);
+        // tmp += this.dzString.charAt((this.cYear - 4) % 12);
+        // tmp += "年 ";
+        if (this.cMonth < 1) {
+            tmp += "(闰)";
+            tmp += this.monString.charAt(- this.cMonth - 1);
+        } else {
+            tmp += this.monString.charAt(this.cMonth - 1);
+        }
+        tmp += "月";
+        tmp += (this.cDay < 11) ? "初" : ((this.cDay < 20) ? "十" : ((this.cDay < 30) ? "廿" : "三十"));
+        if (this.cDay % 10 != 0 || this.cDay == 10) {
+            tmp += this.numString.charAt((this.cDay - 1) % 10);
+        }
+        return tmp;
+    }
     GetLunarDay(solarYear, solarMonth, solarDay) {
-		if (solarYear < 1921 || solarYear > 2020) {
-			return "";
-		} else {
-			solarMonth = (parseInt(solarMonth) > 0) ? (solarMonth - 1) : 11;
-			this.e2c(solarYear, solarMonth, solarDay);
-			return this.GetcDateString();
-		}
-	}
-    getTideData(){
+        if (solarYear < 1921 || solarYear > 2020) {
+            return "";
+        } else {
+            solarMonth = (parseInt(solarMonth) > 0) ? (solarMonth - 1) : 11;
+            this.e2c(solarYear, solarMonth, solarDay);
+            return this.GetcDateString();
+        }
+    }
+    getlocation() {
+        this.station_info.east_longitude = "";
+        this.station_info.northern_latitude = "";
+        if (this.station_info.station_code == "Z0001")
+        {
+            this.station_info.east_longitude = "122度48份11秒";
+            this.station_info.northern_latitude = "39度03分47秒";
+        }
+        if (this.station_info.station_code == "Z0002")
+        {
+            this.station_info.east_longitude = "122度43分17秒";
+            this.station_info.northern_latitude = "39度00分38秒";
+        }
+        if (this.station_info.station_code == "Z0003")
+        {
+            this.station_info.east_longitude = "122度50分54秒";
+            this.station_info.northern_latitude = "39度04分29秒";
+        }
+        if (this.station_info.station_code == "Z0004")
+        {
+            this.station_info.east_longitude = "122度44分32秒";
+            this.station_info.northern_latitude = "39度02分35秒";
+        }
+        if (this.station_info.station_code == "Z0005")
+        {
+            this.station_info.east_longitude = "122度42分06秒";
+            this.station_info.northern_latitude = "39度02分02秒";
+        }
+        if (this.station_info.station_code == "Z0006")
+        {
+            this.station_info.east_longitude = "122度49分42秒";
+            this.station_info.northern_latitude = "39度02分19秒";
+        }
+        if (this.station_info.station_code == "Z0007")
+        {
+            this.station_info.east_longitude = "122度50分53秒";
+            this.station_info.northern_latitude = "39度03分36秒";
+        }
+        if (this.station_info.station_code == "Z0008")
+        {
+            this.station_info.east_longitude = "123度13分59秒";
+            this.station_info.northern_latitude = "39度06分0.6秒";
+        }
+        if (this.station_info.station_code == "Z0009")
+        {
+            this.station_info.east_longitude = "122度48分44秒";
+            this.station_info.northern_latitude = "39度02分04秒";
+        }
+        if (this.station_info.station_code == "Z0010")
+        {
+            this.station_info.east_longitude = "122度48分24秒";
+            this.station_info.northern_latitude = "39度04分55秒";
+        }
+        if (this.station_info.station_code == "Z0011")
+        {
+            this.station_info.east_longitude = "";
+            this.station_info.northern_latitude = "";
+        }
+        if (this.station_info.station_code == "Z0012")
+        {
+            this.station_info.east_longitude = "";
+            this.station_info.northern_latitude = "";
+        }
+    }
+    getTideData() {
         let now = new Date();
         let publicDateFrom = now.getFullYear() + "-" + (now.getMonth() + 1) + "-" + now.getDate();
         // let tomorrow = new Date(now.setDate(now.getDate()+1));
@@ -175,10 +238,18 @@ export class MonitorTemperaturePage implements OnInit {
     getSeaTemperatureData() {
         let now = new Date();
         let today = now.getFullYear() + "-" + (now.getMonth() + 1) + "-" + now.getDate();
+        this.seaTemperature= [];
+        this.currentSeaTemperature.time = "00:00";
+        this.currentSeaTemperature.t3 = "";
+        this.currentSeaTemperature.t6 = "";
+        this.currentSeaTemperature.t9 = "";
+        this.currentSeaTemperature.t12 = "";
+        this.currentSeaTemperature.t20 = "";
         this.service.getSeaTemperature(this.station_info.station_code, today).subscribe(res => {
             // console.log(res);
             if (res.isSuccess) {
-                this.seaTemperature = res.data;
+                this.seaTemperature = res.data;   
+                if(this.seaTemperature.length > 0){             
                 let tc = new Date(this.seaTemperature[this.seaTemperature.length - 1].time);
                 let hours = (tc.getHours() > 9) ? tc.getHours() : "0" + tc.getHours();
                 let minutes = (tc.getMinutes() > 9) ? tc.getMinutes() : "0" + tc.getMinutes();
@@ -188,6 +259,7 @@ export class MonitorTemperaturePage implements OnInit {
                 this.currentSeaTemperature.t9 = (this.seaTemperature[this.seaTemperature.length - 1].t9) ? this.seaTemperature[this.seaTemperature.length - 1].t9 : "";
                 this.currentSeaTemperature.t12 = (this.seaTemperature[this.seaTemperature.length - 1].t12) ? this.seaTemperature[this.seaTemperature.length - 1].t12 : "";
                 this.currentSeaTemperature.t20 = (this.seaTemperature[this.seaTemperature.length - 1].t20) ? this.seaTemperature[this.seaTemperature.length - 1].t20 : "";
+                }
                 this.generateSeaTemperatureChart();
             }
             else {
@@ -216,8 +288,8 @@ export class MonitorTemperaturePage implements OnInit {
 
         // this.generateSeaTemperatureChart();
     }
-    getTemperatureShelf(){
-        
+    getTemperatureShelf() {
+
         this.service.getTemperatureShelfByToday().subscribe(res => {
             // console.log(res);
             if (res.isSuccess) {
@@ -234,8 +306,8 @@ export class MonitorTemperaturePage implements OnInit {
             return;
         });
     }
-    getTemperatureDataByMonth(){
-        
+    getTemperatureDataByMonth() {
+
         this.service.getTemperatureByMonth().subscribe(res => {
             // console.log(res);
             if (res.isSuccess) {

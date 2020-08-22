@@ -56,10 +56,10 @@
           <ion-icon name="boat" color="#00569F" style="font-size: larger;margin-right: 10px;"></ion-icon> Z0007:小耗岛西部
         </ion-label>
       </ion-item>
-      <ion-item (click)="viewTemperature('Z0008:海1','Z0008')" style="padding:2px 20px 2px 20px;"
+      <ion-item (click)="viewTemperature('Z0008:海洋岛东','Z0008')" style="padding:2px 20px 2px 20px;"
         *ngIf="checkEquip('Z0008')">
         <ion-label class="itemlist">
-          <ion-icon name="boat" color="default" style="font-size: larger;margin-right: 10px;"></ion-icon>Z0008:獐子岛马牙滩
+          <ion-icon name="boat" color="default" style="font-size: larger;margin-right: 10px;"></ion-icon>Z0008:海洋岛东
         </ion-label>
       </ion-item>
       <ion-item (click)="viewTemperature('Z0009:大耗岛西部','Z0009')" style="padding:2px 20px 2px 20px;"
@@ -80,10 +80,10 @@
           <ion-icon name="boat" color="default" style="font-size: larger;margin-right: 10px;"></ion-icon>Z0011:山东砣矶岛
         </ion-label>
       </ion-item>
-      <ion-item (click)="viewTemperature('Z0011:海2','Z0012')" style="padding:2px 20px 2px 20px;"
+      <ion-item (click)="viewTemperature('Z0012:海洋岛东南','Z0012')" style="padding:2px 20px 2px 20px;"
       *ngIf="checkEquip('Z0012')">
       <ion-label class="itemlist">
-        <ion-icon name="boat" color="default" style="font-size: larger;margin-right: 10px;"></ion-icon>Z0012:海2
+        <ion-icon name="boat" color="default" style="font-size: larger;margin-right: 10px;"></ion-icon>Z0012:海洋岛东南
       </ion-label>
     </ion-item>
       <!-- <ion-item (click)="viewCurrent('獐子岛南洋','2')">
@@ -145,8 +145,7 @@
       <p>自动站数据</p>
     </div>
     <ion-list no-margin>
-      <ion-item (click)="viewAutoSiteData('Z0000自动站','Z0000')" style="padding:2px 20px 2px 20px;"
-        *ngIf="checkEquip('Z0000')">
+      <ion-item (click)="viewAutoSiteData('Z0000自动站','Z0000')" style="padding:2px 20px 2px 20px;">
         <ion-label class="itemlist">
           <ion-icon name="boat" color="#00569F" style="font-size: larger;margin-right: 10px;"></ion-icon> Z0000自动站
         </ion-label>

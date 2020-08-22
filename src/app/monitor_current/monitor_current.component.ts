@@ -19,6 +19,8 @@ export class MonitorCurrentPage implements OnInit {
     station_info = {
         station_name: "",
         station_code: "",
+        east_longitude: "",
+        northern_latitude: "",
     }
     ec: any = echarts;
     chartSeaCurrentOption: any;
@@ -41,6 +43,7 @@ export class MonitorCurrentPage implements OnInit {
             this.station_info.station_code = data.stationCode;
             this.currentChart = this.ec.init(document.getElementById('currentChart'))
             this.getSeaCurrentData();
+            this.getlocation();
         });
         // this.refreshChart();
     }
@@ -49,6 +52,31 @@ export class MonitorCurrentPage implements OnInit {
         this.chartSeaCurrentOption = null;
         this.currentDeep = "";
         this.seaCurrent = null;
+    }
+    
+    getlocation() {
+        this.station_info.east_longitude = "";
+        this.station_info.northern_latitude = "";
+        if (this.station_info.station_code == "Z0001")
+        {
+            this.station_info.east_longitude = "122度48份11秒";
+            this.station_info.northern_latitude = "39度03分47秒";
+        }
+        if (this.station_info.station_code == "Z0002")
+        {
+            this.station_info.east_longitude = "122度43分17秒";
+            this.station_info.northern_latitude = "39度00分38秒";
+        }
+        if (this.station_info.station_code == "Z0003")
+        {
+            this.station_info.east_longitude = "122度50分54秒";
+            this.station_info.northern_latitude = "39度04分29秒";
+        }
+        if (this.station_info.station_code == "Z0010")
+        {
+            this.station_info.east_longitude = "122度48分24秒";
+            this.station_info.northern_latitude = "39度04分55秒";
+        }
     }
     getSeaCurrentData() {
         this.service.getCurrentInfo(this.station_info.station_code,).subscribe(res => {
