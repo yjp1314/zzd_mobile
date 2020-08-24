@@ -112,7 +112,7 @@
         </ion-label>
       </ion-item> -->
     </ion-list>
-    <div class="aui-text-title">
+    <div class="aui-text-title" *ngIf="checkEquip('LZ')">
       <p>流向流速数据</p>
     </div>
     <ion-list no-margin>
@@ -141,7 +141,7 @@
         </ion-label>
       </ion-item>
     </ion-list>
-    <div class="aui-text-title">
+    <div class="aui-text-title" *ngIf="checkEquip('ZDZ')">
       <p>自动站数据</p>
     </div>
     <ion-list no-margin>
